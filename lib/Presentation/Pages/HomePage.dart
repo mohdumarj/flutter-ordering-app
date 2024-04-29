@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Pages/StaffOptionPage.dart';
+import 'UserManagement/StaffUser/StaffOptionPage.dart';
 import '../Pages/UserManagement/CustomerUser/LoginPage.dart';
 
 // import '../UserManagement/CustomerUser/LoginPage.dart';

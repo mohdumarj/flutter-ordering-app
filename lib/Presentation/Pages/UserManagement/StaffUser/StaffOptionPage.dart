@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'UserManagement/StaffUser/KitchenStaffLoginPage.dart';
-import 'UserManagement/StaffUser/WaiterLoginPage.dart';
+import 'KitchenStaffLoginPage.dart';
+import 'WaiterLoginPage.dart';
 
 // import '../UserManagement/StaffUser/KitchenStaffLoginPage.dart';
 // import '../UserManagement/StaffUser/WaiterLoginPage.dart';

@@ -120,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
     String username = _usernameController.text;
     String password = _passwordController.text;
     String email = _emailController.text;
-    String confirmPassword = _passwordController.text;
+    String confirmPassword = _confirmPasswordController.text;
     String phoneNumber = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);

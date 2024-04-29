@@ -1,12 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
+import '../../../../Globals/Common/Toast.dart';
 import '../../ForgotPasswordPage.dart';
 import '../../KitchenDashboardPage.dart';
 import '../SignUp/StaffSignUpPage.dart';
 // import '../../StaffSignUpPage.dart';
 
-class KitchenStaffLoginPage extends StatelessWidget {
+class KitchenStaffLoginPage extends StatefulWidget {
+  @override
+  State<KitchenStaffLoginPage> createState() => _KitchenStaffLoginPageState();
+}
+
+class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  bool isSignin = false;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +40,11 @@ class KitchenStaffLoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Username'),
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
             ),
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
@@ -54,11 +77,12 @@ class KitchenStaffLoginPage extends StatelessWidget {
             SizedBox(height: 20), // Additional space before the Log In button
             ElevatedButton(
               onPressed: () {
+                _signIn();
                 // Navigate to Kitchen Dashboard
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => KitchenDashboardPage()),
-                );
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => KitchenDashboardPage()),
+                // );
               },
               child: Text('Log In', style: TextStyle(fontSize: 18)), // Slightly reduced font size
               style: ElevatedButton.styleFrom(
@@ -70,5 +94,31 @@ class KitchenStaffLoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  void _signIn() async {
+
+    setState(() {
+      isSignin = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      isSignin = false;
+    });
+    if (user != null) {
+      showToast(message: "User has successfully been verified");
+      // Navigator.pushNamed(context, "/home");
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => KitchenDashboardPage()),
+      );
+    } else {
+      showToast(message: "An error occured, do you have an account?");
+    }
   }
 }
