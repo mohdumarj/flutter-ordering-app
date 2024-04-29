@@ -12,7 +12,7 @@ Future<void> main() async {
   );
 
 // Ideal time to initialize
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+//   await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 //...
 
   runApp(QuickServeApp());

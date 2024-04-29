@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:untitled9/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
+import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
 
 import '../../../../Globals/Common/Toast.dart';
 import '../../CustomerPage.dart';
@@ -128,12 +129,12 @@ class _SignUpPageState extends State<SignUpPage> {
       isSigningUp = false;
     });
     if (user != null) {
-      showToast(message: "User is successfully created");
+      showToast(message: "User is successfully created. Please login to proceed.");
      // Navigator.pushNamed(context, "/home");
 
       Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => CustomerPage()),
+            MaterialPageRoute(builder: (context) => LoginPage()),
           );
     } else {
       showToast(message: "Some error happend");

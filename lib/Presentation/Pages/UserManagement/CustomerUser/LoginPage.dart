@@ -1,11 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
+import '../../../../Globals/Common/Toast.dart';
 import '../../CustomerPage.dart';
 import '../../ForgotPasswordPage.dart';
-import '../SignUp/SignUpPage.dart';
+import 'SignUpPage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  TextEditingController _emailController = TextEditingController();
+   TextEditingController _passwordController = TextEditingController();
+  bool isSignin = false;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,11 +40,13 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
               ),
             ),
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
@@ -55,10 +79,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => CustomerPage()),
-                );
+                _signIn();
               },
               child: Text('Log In'),
             ),
@@ -67,5 +88,32 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+  void _signIn() async {
+
+    setState(() {
+      isSignin = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      isSignin = false;
+    });
+    if (user != null) {
+      showToast(message: "User has successfully been verified");
+      // Navigator.pushNamed(context, "/home");
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => CustomerPage()),
+      );
+    } else {
+      showToast(message: "An error occured, do you have an account?");
+    }
+  }
+
 }
 
