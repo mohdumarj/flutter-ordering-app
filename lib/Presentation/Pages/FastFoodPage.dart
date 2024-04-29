@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 // import '../BaithAlShaypage.dart';
 // import '../NafahatBurgerPage.dart';
-import 'BaithAlShaypage.dart';
-import 'NafahatBurgerPage.dart';
+import '../Pages/BaithAlShaypage.dart';
+import '../Pages/NafahatBurgerPage.dart';
 import 'RestaurantLabelPage.dart';
 class FastFoodPage extends StatelessWidget {
   @override

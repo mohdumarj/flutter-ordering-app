@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'StaffOptionPage.dart';
-import 'UserManagement/CustomerUser/LoginPage.dart';
+import '../Pages/StaffOptionPage.dart';
+import '../Pages/UserManagement/CustomerUser/LoginPage.dart';
 
 // import '../UserManagement/CustomerUser/LoginPage.dart';
 // import '../StaffOptionPage.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'BaitAlMadkohoutPage.dart';
-import 'RestaurantLabelPage.dart';
+import '../Pages/BaitAlMadkohoutPage.dart';
+import '../Pages/RestaurantLabelPage.dart';
 
 class AsianFoodPage extends StatelessWidget {
   @override

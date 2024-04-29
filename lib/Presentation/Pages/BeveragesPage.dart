@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 // import '../BaithAlShaypage.dart';
 // import '../Cafe42Page.dart';
-import 'BaithAlShaypage.dart';
-import 'Cafe42Page.dart';
+import '../Pages/BaithAlShaypage.dart';
+import '../Pages/Cafe42Page.dart';
 import 'RestaurantLabelPage.dart';
 
 class BeveragesPage extends StatelessWidget {

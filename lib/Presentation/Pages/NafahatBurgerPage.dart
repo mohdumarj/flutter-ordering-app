@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'MenuItemCard.dart';
+import '../Pages/MenuItemCard.dart';
 
 class NafahatBurgerPage extends StatelessWidget {
   @override

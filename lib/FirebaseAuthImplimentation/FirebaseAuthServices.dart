@@ -4,6 +4,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../Globals/Common/Toast.dart';
+
 // import '../../../global/common/toast.dart';
 
 
@@ -19,9 +21,9 @@ class FirebaseAuthService {
     } on FirebaseAuthException catch (e) {
 
       if (e.code == 'email-already-in-use') {
-        // showToast(message: 'The email address is already in use.');
+        showToast(message: 'The email address is already in use.');
       } else {
-        // showToast(message: 'An error occurred: ${e.code}');
+        showToast(message: 'An error occurred: ${e.code}');
       }
     }
     return null;

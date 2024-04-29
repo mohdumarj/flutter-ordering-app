@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'KpiCardPage.dart';
+import '../Pages/KpiCardPage.dart';
 
 class OrderHistoryPage extends StatelessWidget {
   @override

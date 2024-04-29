@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'UserManagement/CustomerUser/LoginPage.dart';
+import '../Pages/UserManagement/CustomerUser/LoginPage.dart';
 // import '../UserManagement/CustomerUser/LoginPage.dart';
 
 class AccountPage extends StatelessWidget {

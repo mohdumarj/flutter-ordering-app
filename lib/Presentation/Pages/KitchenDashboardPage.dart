@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'KpiCardPage.dart';
-import 'StatisticsPage.dart';
+import '../Pages/KpiCardPage.dart';
+import '../Pages/StatisticsPage.dart';
 
 // import '../KpiCardPage.dart';
 // import '../StatisticsPage.dart';
