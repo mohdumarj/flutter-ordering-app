@@ -42,7 +42,7 @@ class OrderCard extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Customer: $customerName'),
+            Text('CustomerUser: $customerName'),
             Text('Details: $orderDetails'),
             Text('Time: $orderTime'),
           ],

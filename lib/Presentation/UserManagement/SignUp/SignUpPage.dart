@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'CustomerPage.dart';
+import '../../CustomerPage.dart';
 
 class SignUpPage extends StatelessWidget {
   //@Override

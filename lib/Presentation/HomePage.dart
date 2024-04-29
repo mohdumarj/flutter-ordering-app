@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'LoginPage.dart';
 import 'StaffOptionPage.dart';
+import 'UserManagement/CustomerUser/LoginPage.dart';
+
+// import '../UserManagement/CustomerUser/LoginPage.dart';
+// import '../StaffOptionPage.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -24,7 +27,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20), // Space between buttons
             ElevatedButton(
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => LoginPage())), // Navigate to Customer Login Page
-              child: Text('Customer', style: TextStyle(fontSize: 20)),
+              child: Text('CustomerUser', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 60),
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),

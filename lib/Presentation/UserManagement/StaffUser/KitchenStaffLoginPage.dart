@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ForgotPasswordPage.dart';
-import 'KitchenDashboardPage.dart';
-import 'StaffSignUpPage.dart';
+import '../../ForgotPasswordPage.dart';
+import '../../KitchenDashboardPage.dart';
+import '../SignUp/StaffSignUpPage.dart';
+// import '../../StaffSignUpPage.dart';
 
 class KitchenStaffLoginPage extends StatelessWidget {
   @override

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'CartItem.dart';
 
+// import 'Presentation/CartItem.dart';
+
 class CartPage extends StatelessWidget {
   // Example list of items in the cart
   final List<CartItem> items = [

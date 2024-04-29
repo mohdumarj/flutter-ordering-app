@@ -1,20 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// import '../BaithAlShaypage.dart';
+// import '../Cafe42Page.dart';
+import 'BaithAlShaypage.dart';
 import 'Cafe42Page.dart';
 import 'RestaurantLabelPage.dart';
 
-class SweetsPage extends StatelessWidget {
+class BeveragesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sweets'),
+        title: Text('Beverages'),
       ),
       body: Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the button if it's only one
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            RestaurantLabel(
+              label: 'Baith Al Shay',
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BaithAlShaypage()),
+                );
+              },
+            ),
             RestaurantLabel(
               label: '42 Cafe',
               color: Colors.purple,
