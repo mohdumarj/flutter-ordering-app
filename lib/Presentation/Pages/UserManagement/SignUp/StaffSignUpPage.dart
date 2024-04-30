@@ -1,12 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
 import '../CustomerUser/LoginPage.dart';
 
 
 class StaffSignUpPage extends StatefulWidget {
+
+  final dynamic data;
+
+  StaffSignUpPage({Key? key, required this.data}) : super(key: key);
+
   @override
   State<StaffSignUpPage> createState() => _StaffSignUpPageState();
 }
@@ -17,6 +24,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
   TextEditingController _resturantNameController = TextEditingController();
   //Restaurant License
   TextEditingController _resturantLicenseNumberController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -28,6 +36,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     // TODO: implement dispose
     _resturantNameController.dispose();
     _resturantLicenseNumberController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     _emailController.dispose();
     _confirmPasswordController.dispose();
@@ -57,6 +66,13 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
 
               decoration: InputDecoration(
                 labelText: 'Restaurant License',
+              ),
+            ),
+            TextField(
+              controller: _emailController,
+
+              decoration: InputDecoration(
+                labelText: 'Username',
               ),
             ),
             TextField(
@@ -115,7 +131,8 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     });
 
     String resturantName = _resturantNameController.text;
-    String resturantLicenseNumner = _resturantLicenseNumberController.text;
+    String resturantLicenseNumber = _resturantLicenseNumberController.text;
+    String username = _usernameController.text;
     String password = _passwordController.text;
     String email = _emailController.text;
     String confirmPassword = _confirmPasswordController.text;
@@ -130,6 +147,14 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
       showToast(message: "User is successfully created. Please login to proceed.");
       // Navigator.pushNamed(context, "/home");
 
+      _createUser(UsersModel(
+          Id : "1",
+          Username : username,
+          UserType : widget.data,
+          Email : email,
+          PhoneNumber : phoneNumber
+      ));
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
@@ -137,5 +162,17 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     } else {
       showToast(message: "Some error happend");
     }
+  }
+  void _createUser(UsersModel usersModel) {
+    final usersCollection = FirebaseFirestore.instance.collection("Users");
+    String id = usersCollection.doc().id;
+    final newUser = UsersModel(
+        Id: id,
+        Username : usersModel.Username,
+        UserType: usersModel.UserType,
+        Email: usersModel.Email,
+        PhoneNumber: usersModel.PhoneNumber
+    );
+    usersCollection.doc("Users").set(newUser.toJson());
   }
 }

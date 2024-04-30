@@ -67,7 +67,7 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
                     // Navigate to Sign Up Page
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StaffSignUpPage()),
+                      MaterialPageRoute(builder: (context) => StaffSignUpPage(data: "KitchenStaff")),
                     );
                   },
                   child: Text('Does not have an account?'),

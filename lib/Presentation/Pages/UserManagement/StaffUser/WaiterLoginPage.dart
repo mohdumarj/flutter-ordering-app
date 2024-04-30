@@ -67,7 +67,7 @@ class _WaiterLoginPageState extends State<WaiterLoginPage> {
                     // Navigate to Sign Up Page
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StaffSignUpPage()),
+                      MaterialPageRoute(builder: (context) => StaffSignUpPage(data:"Waiter")),
                     );
                   },
                   child: Text('Does not have an account?'),
