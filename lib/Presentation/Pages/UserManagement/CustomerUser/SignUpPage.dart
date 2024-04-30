@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:untitled9/Entities/UsersModel.dart';
 import 'package:untitled9/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../Globals/Common/Toast.dart';
 import '../../CustomerPage.dart';
@@ -132,6 +134,14 @@ class _SignUpPageState extends State<SignUpPage> {
       showToast(message: "User is successfully created. Please login to proceed.");
      // Navigator.pushNamed(context, "/home");
 
+      _createUser(UsersModel(
+          Id : "1",
+          Username : username,
+          UserType : "Customer",
+          Email : email,
+          PhoneNumber : phoneNumber
+      ));
+
       Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
@@ -139,6 +149,19 @@ class _SignUpPageState extends State<SignUpPage> {
     } else {
       showToast(message: "Some error happend");
     }
+  }
+
+  void _createUser(UsersModel usersModel) {
+    final usersCollection = FirebaseFirestore.instance.collection("Users");
+    String id = usersCollection.doc().id;
+    final newUser = UsersModel(
+        Id: id,
+        Username : usersModel.Username,
+        UserType: usersModel.UserType,
+        Email: usersModel.Email,
+        PhoneNumber: usersModel.PhoneNumber
+    );
+    usersCollection.doc("Users").set(newUser.toJson());
   }
 }
 
