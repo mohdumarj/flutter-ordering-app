@@ -16,13 +16,15 @@ class RestaurantMenuModel{
         // restaurantId: snapshot['restaurantId'],
         menuName: snapshot['menuName'],
         startDate: snapshot['startDate'],
-        endDate: snapshot['endDate']
+        endDate: snapshot['endDate'],
+      menuItems: snapshot['menuItems']
 
     );
   }
 
 
   RestaurantMenuModel( {this.id, /*this.restaurantId,*/ this.menuName, this.startDate,this.endDate,this.menuItems});
+
   Map<String, dynamic> toJson() {
     return {
       "id": id,
@@ -30,7 +32,9 @@ class RestaurantMenuModel{
       "menuName": menuName,
       "startDate": startDate,
       "endDate": endDate,
+      "menuItems":menuItems?.map((menuItem) => menuItem.toJson()).toList(),
 
-    };
+
+  };
   }
 }

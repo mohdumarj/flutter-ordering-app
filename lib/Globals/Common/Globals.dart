@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:untitled9/Entities/RestaurantMenuModel.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
 
 import '../../Entities/MenuItemModel.dart';
+import 'Toast.dart';
 
 class Globals {
 
@@ -82,6 +84,7 @@ class Globals {
         await restaurantsCollection.add(restaurant1.toJson());
         await restaurantsCollection.add(restaurant2.toJson());
       } catch (e) {
+        showToast(message:"Error adding user: $e");
         print("Error adding user: $e");
       }
     }

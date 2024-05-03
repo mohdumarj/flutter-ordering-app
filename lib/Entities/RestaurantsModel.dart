@@ -34,7 +34,8 @@ class RestaurantsModel{
       "Email": email,
       "Website": website,
       "PhoneNumber": phoneNumber,
-      "menusList" : menusList,
+      "menusList" : menusList.map((menu) => menu.toJson()).toList(),
+
     };
   }
 }
