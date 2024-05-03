@@ -1,32 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:untitled9/Entities/RestaurantsModel.dart';
 
 class UsersModel{
-  final String? Id;
-  final String? Username ;
-  final String? UserType ;
-  final String? Email ;
-  final String? PhoneNumber ;
+  final String? id;
+  final String? username ;
+  final String? userType ;
+  final String? email ;
+  final String? phoneNumber ;
+  final RestaurantsModel? restaurant ;
 
-  UsersModel({this.Id, this.Username, this.UserType, this.Email, this.PhoneNumber});
+  UsersModel({this.id, this.username, this.userType, this.email, this.phoneNumber, this.restaurant});
 
 
   static UsersModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
     return UsersModel(
-        Id: snapshot['Id'],
-        Username: snapshot['Username'],
-        UserType: snapshot['UserType'],
-        Email: snapshot['Email'],
-        PhoneNumber: snapshot['PhoneNumber']
+        id: snapshot['id'],
+        username: snapshot['username'],
+        userType: snapshot['userType'],
+        email: snapshot['email'],
+        phoneNumber: snapshot['phoneNumber'],
+        restaurant : snapshot['restaurant']
 
     );
   }
   Map<String, dynamic> toJson() {
     return {
-      "Id": Id,
-      "Username": Username,
-      "UserType": UserType,
-      "Email": Email,
-      "PhoneNumber": PhoneNumber,
+      "id": id,
+      "username": username,
+      "userType": userType,
+      "email": email,
+      "phoneNumber": phoneNumber,
+      "restaurant" : restaurant
     };
   }
 }

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/KitchenStaffLoginPage.dart';
+import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/WaiterLoginPage.dart';
 
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
@@ -138,40 +140,54 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     String confirmPassword = _confirmPasswordController.text;
     String phoneNumber = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    if(password != confirmPassword ){
+      showToast(message: "Password mismatch error");
+    }else {
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-    setState(() {
-      isSigningUp = false;
-    });
-    if (user != null) {
-      showToast(message: "User is successfully created. Please login to proceed.");
-      // Navigator.pushNamed(context, "/home");
+      setState(() {
+        isSigningUp = false;
+      });
+      if (user != null) {
+        showToast(message: widget.data + " User is successfully created. Please login to proceed.");
+        // Navigator.pushNamed(context, "/home");
 
-      _createUser(UsersModel(
-          Id : "1",
-          Username : username,
-          UserType : widget.data,
-          Email : email,
-          PhoneNumber : phoneNumber
-      ));
+        _createUser(UsersModel(
+            id : "1",
+            username : username,
+            userType : widget.data,
+            email : email,
+            phoneNumber : phoneNumber
+        ));
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    } else {
-      showToast(message: "Some error happend");
+        if(widget.data == "Waiter"){
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => WaiterLoginPage()),
+          );
+        }else if(widget.data == "KitchenStaff"){
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => KitchenStaffLoginPage()),
+          );
+        }
+
+      } else {
+        showToast(message: "Some error happend");
+      }
     }
+
+
   }
   void _createUser(UsersModel usersModel) {
     final usersCollection = FirebaseFirestore.instance.collection("Users");
     String id = usersCollection.doc().id;
     final newUser = UsersModel(
-        Id: id,
-        Username : usersModel.Username,
-        UserType: usersModel.UserType,
-        Email: usersModel.Email,
-        PhoneNumber: usersModel.PhoneNumber
+        id: id,
+        username : usersModel.username,
+        userType: usersModel.userType,
+        email: usersModel.email,
+        phoneNumber: usersModel.phoneNumber
     );
     usersCollection.doc("Users").set(newUser.toJson());
   }

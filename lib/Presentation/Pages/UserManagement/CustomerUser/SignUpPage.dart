@@ -135,11 +135,11 @@ class _SignUpPageState extends State<SignUpPage> {
      // Navigator.pushNamed(context, "/home");
 
       _createUser(UsersModel(
-          Id : "1",
-          Username : username,
-          UserType : "Customer",
-          Email : email,
-          PhoneNumber : phoneNumber
+          id : "1",
+          username : username,
+          userType : "Customer",
+          email : email,
+          phoneNumber : phoneNumber
       ));
 
       Navigator.pushReplacement(
@@ -155,11 +155,11 @@ class _SignUpPageState extends State<SignUpPage> {
     final usersCollection = FirebaseFirestore.instance.collection("Users");
     String id = usersCollection.doc().id;
     final newUser = UsersModel(
-        Id: id,
-        Username : usersModel.Username,
-        UserType: usersModel.UserType,
-        Email: usersModel.Email,
-        PhoneNumber: usersModel.PhoneNumber
+        id: id,
+        username : usersModel.username,
+        userType: usersModel.userType,
+        email: usersModel.email,
+        phoneNumber: usersModel.phoneNumber
     );
     usersCollection.doc("Users").set(newUser.toJson());
   }
