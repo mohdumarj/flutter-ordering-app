@@ -11,6 +11,17 @@ class UsersModel{
 
   UsersModel({this.id, this.username, this.userType, this.email, this.phoneNumber, this.restaurant});
 
+  factory UsersModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
+    return UsersModel(
+
+        id: snapshot['id']?? '',
+        username: snapshot['username']?? '',
+        userType: snapshot['userType']?? '',
+        email: snapshot['email']?? '',
+        phoneNumber: snapshot['phoneNumber']?? '',
+        restaurant : snapshot['restaurant'],
+    );
+  }
 
   static UsersModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
     return UsersModel(

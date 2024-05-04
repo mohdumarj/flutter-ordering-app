@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
      // Navigator.pushNamed(context, "/home");
 
       _createUser(UsersModel(
-          id : "1",
+          id : user.uid,
           username : username,
           userType : "Customer",
           email : email,
@@ -151,17 +151,40 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
-  void _createUser(UsersModel usersModel) {
-    final usersCollection = FirebaseFirestore.instance.collection("Users");
-    String id = usersCollection.doc().id;
-    final newUser = UsersModel(
-        id: id,
-        username : usersModel.username,
-        userType: usersModel.userType,
-        email: usersModel.email,
-        phoneNumber: usersModel.phoneNumber
-    );
-    usersCollection.doc("Users").set(newUser.toJson());
+  Future<void> _createUser(UsersModel usersModel) async {
+    try {
+
+      // Get the current user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      // Reference to the Firestore collection
+      CollectionReference users = FirebaseFirestore.instance.collection('Users');
+
+      // Add a new document with the user's UID as the document ID
+      final newUser = UsersModel(
+          id: usersModel.id,
+          username : usersModel.username,
+          userType: usersModel.userType,
+          email: usersModel.email,
+          phoneNumber: usersModel.phoneNumber
+      );
+
+      await users.doc(user?.uid).set(newUser.toJson());
+
+      showToast(message: 'User profile has been added');
+    } catch (e) {
+      showToast(message: 'Error adding user to Firestore: $e');
+    }
+    // final usersCollection = FirebaseFirestore.instance.collection("Users");
+    //
+    // final newUser = UsersModel(
+    //     id: usersModel.id,
+    //     username : usersModel.username,
+    //     userType: usersModel.userType,
+    //     email: usersModel.email,
+    //     phoneNumber: usersModel.phoneNumber
+    // );
+    // usersCollection.doc("Users").set(newUser.toJson());
   }
 }
 

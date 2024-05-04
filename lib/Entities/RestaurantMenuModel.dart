@@ -4,7 +4,7 @@ import 'MenuItemModel.dart';
 
 class RestaurantMenuModel{
   final String? id;
-  // final String? restaurantId ;
+   final String? restaurantId ;
   final String? menuName ;
   final String? startDate ;
   final String? endDate ;
@@ -13,7 +13,7 @@ class RestaurantMenuModel{
   static RestaurantMenuModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
     return RestaurantMenuModel(
         id: snapshot['id'],
-        // restaurantId: snapshot['restaurantId'],
+        restaurantId: snapshot['restaurantId'],
         menuName: snapshot['menuName'],
         startDate: snapshot['startDate'],
         endDate: snapshot['endDate'],
@@ -23,12 +23,12 @@ class RestaurantMenuModel{
   }
 
 
-  RestaurantMenuModel( {this.id, /*this.restaurantId,*/ this.menuName, this.startDate,this.endDate,this.menuItems});
+  RestaurantMenuModel( {this.id, this.restaurantId, this.menuName, this.startDate,this.endDate,this.menuItems});
 
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      // "restaurantId": restaurantId,
+       "restaurantId": restaurantId,
       "menuName": menuName,
       "startDate": startDate,
       "endDate": endDate,

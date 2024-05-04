@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Entities/UsersModel.dart';
 
 import 'AccountPage.dart';
 import 'AsianFoodPage.dart';
@@ -14,12 +15,21 @@ import 'NafahatBurgerPage.dart';
 import 'RestaurantLabelPage.dart';
 import 'SweetsPage.dart';
 
-class CustomerPage extends StatelessWidget {
+class CustomerPage extends StatefulWidget {
+
+  final dynamic data;
+  CustomerPage({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<CustomerPage> createState() => _CustomerPageState();
+}
+
+class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Customer'),
+        title: Text('Welcome ' + widget.data.toString().toUpperCase()),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -193,4 +203,5 @@ class CustomerPage extends StatelessWidget {
       ),
     );
   }
+
 }

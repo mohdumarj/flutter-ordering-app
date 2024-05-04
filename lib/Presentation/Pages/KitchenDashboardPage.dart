@@ -7,7 +7,15 @@ import '../Pages/StatisticsPage.dart';
 // import '../KpiCardPage.dart';
 // import '../StatisticsPage.dart';
 
-class KitchenDashboardPage extends StatelessWidget {
+class KitchenDashboardPage extends StatefulWidget {
+  final dynamic data;
+  KitchenDashboardPage({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<KitchenDashboardPage> createState() => _KitchenDashboardPageState();
+}
+
+class _KitchenDashboardPageState extends State<KitchenDashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
