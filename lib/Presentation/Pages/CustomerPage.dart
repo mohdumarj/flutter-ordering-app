@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Entities/RestaurantsModel.dart';
 import 'package:untitled9/Entities/UsersModel.dart';
 
 import 'AccountPage.dart';
@@ -27,6 +29,11 @@ class CustomerPage extends StatefulWidget {
 class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
+    var restaurantsList = _readRestaurantsData();
+    //=> Restaurants list contains all registered restaurants in the system.
+    // Each restaurant has its Menus as colelction
+    // Each Menu has its items list in it as collection
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Welcome ' + widget.data.toString().toUpperCase()),
@@ -202,6 +209,18 @@ class _CustomerPageState extends State<CustomerPage> {
         ),
       ),
     );
+  }
+  Future<Stream<List<RestaurantsModel>>> _readRestaurantsData() async {
+    try {
+      final restaurantCollection = FirebaseFirestore.instance.collection("Restaurants");
+
+      return restaurantCollection.snapshots().map((qureySnapshot)
+      => qureySnapshot.docs.map((e)
+      => RestaurantsModel.fromSnapshot(e),).toList());
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+
   }
 
 }
