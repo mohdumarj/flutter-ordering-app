@@ -33,7 +33,8 @@ class Globals {
                     description: "Cheez Fatair: special Fatair made with cheeze",
                     price: "20 AED",
                     picture: "",
-                    calories: "200"
+                    calories: "200",
+                    category: "Arabic Food"
                 ),
                 MenuItemModel(
                     id: "2",
@@ -41,7 +42,8 @@ class Globals {
                     description: "Za'tar Fatair: special Fatair made with Za'tar",
                     price: "20 AED",
                     picture: "",
-                    calories: "200"
+                    calories: "200",
+                    category: "Arabic Food"
                 )
               ])
         ]);
@@ -65,7 +67,8 @@ class Globals {
                     description: "Fresh Milk Chai",
                     price: "2 AED",
                     picture: "",
-                    calories: "200"
+                    calories: "200",
+                    category: "Beverages"
                 ),
                 MenuItemModel(
                     id: "5",
@@ -73,7 +76,8 @@ class Globals {
                     description: "Cofee with Milk",
                     price: "4 AED",
                     picture: "",
-                    calories: "200"
+                    calories: "200",
+                    category: "Beverages"
                 )
               ])
         ]);

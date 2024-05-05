@@ -6,10 +6,11 @@ class MenuItemModel{
   final String? description ;
   final String? price ;
   final String? picture ;
+  final String? category ;
   final String? calories ;
 
   
-  MenuItemModel({this.id, this.name, this.description, this.price,this.picture, this.calories});
+  MenuItemModel({this.id, this.name, this.description, this.price,this.picture,this.category, this.calories});
 
 
   static MenuItemModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
@@ -19,6 +20,7 @@ class MenuItemModel{
         description: snapshot['description'],
         price: snapshot['price'],
         picture: snapshot['picture'],
+        category: snapshot['category'],
         calories: snapshot['calories']
 
     );
@@ -30,6 +32,7 @@ class MenuItemModel{
       "description": description,
       "price": price,
       "picture": picture,
+      "category": category,
       "calories": calories,
     };
   }
@@ -40,6 +43,7 @@ class MenuItemModel{
       description: map['description'],
       price: map['price'],
       calories: map['calories'],
+      category: map['category'],
       picture: map['picture'],
     );
   }
@@ -52,6 +56,7 @@ class MenuItemModel{
       price: snapshot['price']?? '',
       calories: snapshot['calories']?? '',
       picture: snapshot['picture']?? '',
+      category: snapshot['category']?? '',
     );
   }
 }
