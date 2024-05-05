@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Entities/ShoppingCart.dart';
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
@@ -140,6 +141,7 @@ class _WaiterLoginPageState extends State<WaiterLoginPage> {
         // Access data from the document
         //print('Document data: ${documentSnapshot.data()}');
         UsersModel user = UsersModel.fromDocumentSnapshot(documentSnapshot);
+        ShoppingCart().setUserInformation(user);
         return user;
       } else {
         showToast(message: 'User profile does not exist, please contact support');

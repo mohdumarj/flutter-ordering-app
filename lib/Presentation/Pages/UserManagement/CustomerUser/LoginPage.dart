@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Entities/ShoppingCart.dart';
 import 'package:untitled9/Entities/UsersModel.dart';
 
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
@@ -141,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
         // Access data from the document
         //print('Document data: ${documentSnapshot.data()}');
         UsersModel user = UsersModel.fromDocumentSnapshot(documentSnapshot);
+        ShoppingCart().setUserInformation(user);
         return user;
       } else {
         showToast(message: 'User profile does not exist, please contact support');

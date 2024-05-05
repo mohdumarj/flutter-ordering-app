@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Entities/ShoppingCart.dart';
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
@@ -142,6 +143,8 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
         // Access data from the document
         //print('Document data: ${documentSnapshot.data()}');
         UsersModel user = UsersModel.fromDocumentSnapshot(documentSnapshot);
+        //saving userinformatuion in Cart Singleton object for scope of loggedin session.
+        ShoppingCart().setUserInformation(user);
         return user;
       } else {
         showToast(message: 'User profile does not exist, please contact support');
@@ -152,30 +155,4 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
     }
   }
 
-// void _signIn() async {
-  //
-  //   setState(() {
-  //     isSignin = true;
-  //   });
-  //
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
-  //
-  //   User? user = await _auth.signInWithEmailAndPassword(email, password);
-  //
-  //   setState(() {
-  //     isSignin = false;
-  //   });
-  //   if (user != null) {
-  //     showToast(message: "User has successfully been verified");
-  //     // Navigator.pushNamed(context, "/home");
-  //
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => KitchenDashboardPage()),
-  //     );
-  //   } else {
-  //     showToast(message: "An error occured, do you have an account?");
-  //   }
-  // }
 }

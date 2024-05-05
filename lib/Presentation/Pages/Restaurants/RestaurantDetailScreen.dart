@@ -64,35 +64,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(
-          //     'Address: ${widget.restaurant.address}',
-          //     style: TextStyle(fontSize: 18),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(
-          //     'Email: ${widget.restaurant.email}',
-          //     style: TextStyle(fontSize: 18),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(
-          //     'Phone Number: ${widget.restaurant.phoneNumber}',
-          //     style: TextStyle(fontSize: 18),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Text(
-          //     'Website: ${widget.restaurant.website}',
-          //     style: TextStyle(fontSize: 18),
-          //   ),
-          // ),
-          //
+
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
