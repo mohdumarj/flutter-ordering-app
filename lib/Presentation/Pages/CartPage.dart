@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'CartItem.dart';
@@ -8,12 +7,12 @@ import 'CartItem.dart';
 class CartPage extends StatelessWidget {
   // Example list of items in the cart
   final List<CartItem> items = [
-    CartItem(itemName: 'Cheeseburger', itemPrice: 5.99, quantity: 2),
-    CartItem(itemName: 'French Fries', itemPrice: 2.49, quantity: 1),
-    CartItem(itemName: 'Cola', itemPrice: 1.99, quantity: 3),
+    const CartItem(itemName: 'Cheeseburger', itemPrice: 5.99, quantity: 2),
+    const CartItem(itemName: 'French Fries', itemPrice: 2.49, quantity: 1),
+    const CartItem(itemName: 'Cola', itemPrice: 1.99, quantity: 3),
   ];
 
-  CartPage({Key? key}) : super(key: key);
+  CartPage({super.key});
 
   double getTotalPrice() {
     double total = 0.0;
@@ -27,37 +26,37 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        title: const Text('Cart'),
       ),
       body: ListView(
         children: [
           ...items, // Spread the items list into the children array
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Total:',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   '\$${getTotalPrice().toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
                 // Proceed to checkout logic can be added here
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 child: Text(
                   'Proceed to Checkout',
                   style: TextStyle(fontSize: 18),

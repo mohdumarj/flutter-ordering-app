@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../Entities/RestaurantsModel.dart';
@@ -9,7 +8,7 @@ import '../Pages/MenuItemCard.dart';
 class NafahatBurgerPage extends StatefulWidget {
   final RestaurantsModel restaurant;
 
-  NafahatBurgerPage({required this.restaurant});
+  const NafahatBurgerPage({super.key, required this.restaurant});
 
   @override
   State<NafahatBurgerPage> createState() => _NafahatBurgerPageState();
@@ -30,38 +29,38 @@ class _NafahatBurgerPageState extends State<NafahatBurgerPage> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Address: ${widget.restaurant.address}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Email: ${widget.restaurant.email}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Phone Number: ${widget.restaurant.phoneNumber}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Website: ${widget.restaurant.website}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Menu',
                 style: TextStyle(fontSize: 18),
               ),
             ),
-            Column(
+            const Column(
               children: [
                 MenuItemCard(
                   name: 'Fries',
@@ -185,6 +184,7 @@ class _NafahatBurgerPageState extends State<NafahatBurgerPage> {
     } catch (e) {
       showToast(message: 'Error getting Restaurant profile: $e');
     }
+    return null;
   }
 
 }

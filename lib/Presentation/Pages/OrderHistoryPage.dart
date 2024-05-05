@@ -1,17 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Pages/KpiCardPage.dart';
 
 class OrderHistoryPage extends StatelessWidget {
+  const OrderHistoryPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order History'),
+        title: const Text('Order History'),
       ),
       body: ListView(
-        children: [
+        children: const [
           // Repeat OrderCard for each historical order
           OrderCard(
             orderNumber: 'Order #122',

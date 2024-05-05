@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:untitled9/Entities/RestaurantsModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantsModel.dart';
 
 class UsersModel{
   final String? id;

@@ -1,25 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled9/Entities/UsersModel.dart';
+import 'package:AmmarQiuckServe/Entities/UsersModel.dart';
 
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
-import '../../Restaurants/RestaurantsList.dart';
 import 'CustomerPage.dart';
 import '../../ForgotPasswordPage.dart';
 import 'SignUpPage.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool isSignin = false;
 
   @override
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In'),
+        title: const Text('Log In'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,18 +44,18 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,29 +64,29 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ForgotPasswordPage()),
+                          builder: (context) => const ForgotPasswordPage()),
                     );
                   },
-                  child: Text('Forgot Password?'),
+                  child: const Text('Forgot Password?'),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                      MaterialPageRoute(builder: (context) => const SignUpPage()),
                     );
                   },
-                  child: Text('Does not have an account?'),
+                  child: const Text('Does not have an account?'),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
 
                 _signIn();
               },
-              child: Text('Log In'),
+              child: const Text('Log In'),
             ),
           ],
         ),
@@ -149,6 +149,7 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       showToast(message: 'Error getting user profile: $e');
     }
+    return null;
   }
 }
 

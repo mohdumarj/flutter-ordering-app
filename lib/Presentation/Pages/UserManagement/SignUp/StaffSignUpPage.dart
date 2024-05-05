@@ -1,20 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/KitchenStaffLoginPage.dart';
-import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/WaiterLoginPage.dart';
+import 'package:AmmarQiuckServe/Presentation/Pages/UserManagement/StaffUser/KitchenStaffLoginPage.dart';
+import 'package:AmmarQiuckServe/Presentation/Pages/UserManagement/StaffUser/WaiterLoginPage.dart';
 
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
-import '../CustomerUser/LoginPage.dart';
 
 
 class StaffSignUpPage extends StatefulWidget {
 
   final dynamic data;
 
-  StaffSignUpPage({Key? key, required this.data}) : super(key: key);
+  const StaffSignUpPage({super.key, required this.data});
 
   @override
   State<StaffSignUpPage> createState() => _StaffSignUpPageState();
@@ -23,14 +22,14 @@ class StaffSignUpPage extends StatefulWidget {
 class _StaffSignUpPageState extends State<StaffSignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
   //Restaurant Name
-  TextEditingController _resturantNameController = TextEditingController();
+  final TextEditingController _resturantNameController = TextEditingController();
   //Restaurant License
-  TextEditingController _resturantLicenseNumberController = TextEditingController();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _resturantLicenseNumberController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   bool isSigningUp = false;
 
   @override
@@ -47,10 +46,11 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     super.dispose();
   }
   // @Override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Staff Sign Up'),
+        title: const Text('Staff Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,35 +59,35 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
           children: [
             TextField(
               controller: _resturantNameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Restaurant Name',
               ),
             ),
             TextField(
               controller: _resturantLicenseNumberController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Restaurant License',
               ),
             ),
             TextField(
               controller: _emailController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
               ),
             ),
             TextField(
               controller: _emailController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
             TextField(
               controller: _passwordController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
               obscureText: true,
@@ -95,7 +95,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
             TextField(
               controller: _confirmPasswordController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
               ),
               obscureText: true,
@@ -103,12 +103,12 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
             TextField(
               controller: _phoneNumberController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Phone Number',
               ),
               keyboardType: TextInputType.phone,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -117,7 +117,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
                     _signUp();
                     // Implement sign-up functionality for staff members
                   },
-                  child: Text('Sign Up'),
+                  child: const Text('Sign Up'),
                 ),
               ],
             ),
@@ -163,12 +163,12 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
         if(widget.data == "Waiter"){
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => WaiterLoginPage()),
+            MaterialPageRoute(builder: (context) => const WaiterLoginPage()),
           );
         }else if(widget.data == "KitchenStaff"){
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => KitchenStaffLoginPage()),
+            MaterialPageRoute(builder: (context) => const KitchenStaffLoginPage()),
           );
         }
 

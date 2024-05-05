@@ -1,28 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:untitled9/Entities/UsersModel.dart';
-import 'package:untitled9/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
-import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
+import 'package:AmmarQiuckServe/Entities/UsersModel.dart';
+import 'package:AmmarQiuckServe/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
+import 'package:AmmarQiuckServe/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../Globals/Common/Toast.dart';
-import 'CustomerPage.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   bool isSigningUp = false;
 
   @override
@@ -39,10 +38,11 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   //@Override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -51,27 +51,27 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Name',
               ),
             ),
             TextField(
               controller: _usernameController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
               ),
             ),
             TextField(
               controller: _passwordController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
               ),
               obscureText: true,
@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
             TextField(
               controller: _confirmPasswordController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
               ),
               obscureText: true,
@@ -87,12 +87,12 @@ class _SignUpPageState extends State<SignUpPage> {
             TextField(
               controller: _phoneNumberController,
 
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Phone Number',
               ),
               keyboardType: TextInputType.phone,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -104,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     //   MaterialPageRoute(builder: (context) => CustomerPage()),
                     // );
                   },
-                  child: Text('Sign Up'),
+                  child: const Text('Sign Up'),
                 ),
               ],
             ),
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
       Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
+            MaterialPageRoute(builder: (context) => const LoginPage()),
           );
     } else {
       showToast(message: "Some error happend");

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 // import '../BaithAlShaypage.dart';
 // import '../NafahatBurgerPage.dart';
 import '../Pages/BaithAlShaypage.dart';
-import '../Pages/NafahatBurgerPage.dart';
 import 'RestaurantLabelPage.dart';
 class FastFoodPage extends StatelessWidget {
+  const FastFoodPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fast Food'),
+        title: const Text('Fast Food'),
       ),
       body: Center(
         child: Row(
@@ -32,7 +33,7 @@ class FastFoodPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BaithAlShaypage()),
+                  MaterialPageRoute(builder: (context) => const BaithAlShaypage()),
                 );
               },
             ),

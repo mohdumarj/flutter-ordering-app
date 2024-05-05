@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantLabel extends StatelessWidget {
@@ -6,7 +5,7 @@ class RestaurantLabel extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  RestaurantLabel({
+  const RestaurantLabel({super.key, 
     required this.label,
     required this.color,
     required this.onPressed,
@@ -28,7 +27,7 @@ class RestaurantLabel extends StatelessWidget {
           child: Center(
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

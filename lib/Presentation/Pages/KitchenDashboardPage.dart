@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Pages/KpiCardPage.dart';
@@ -9,7 +8,7 @@ import '../Pages/StatisticsPage.dart';
 
 class KitchenDashboardPage extends StatefulWidget {
   final dynamic data;
-  KitchenDashboardPage({Key? key, required this.data}) : super(key: key);
+  const KitchenDashboardPage({super.key, required this.data});
 
   @override
   State<KitchenDashboardPage> createState() => _KitchenDashboardPageState();
@@ -19,7 +18,7 @@ class _KitchenDashboardPageState extends State<KitchenDashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Kitchen Dashboard')),
+      appBar: AppBar(title: const Text('Kitchen Dashboard')),
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
@@ -32,13 +31,13 @@ class _KitchenDashboardPageState extends State<KitchenDashboardPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
           BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Statistics'),
         ],
         onTap: (index) {
           if (index == 1) {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => StatisticsPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const StatisticsPage()));
           }
         },
       ),

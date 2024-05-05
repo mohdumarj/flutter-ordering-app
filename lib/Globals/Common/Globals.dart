@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:untitled9/Entities/RestaurantMenuModel.dart';
-import 'package:untitled9/Entities/RestaurantsModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantMenuModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantsModel.dart';
 
 import '../../Entities/MenuItemModel.dart';
 import 'Toast.dart';
@@ -25,7 +24,7 @@ class Globals {
               id: "1",
               menuName: "All Day Menu",
               startDate: DateTime.now().toString(),
-              endDate: DateTime.now().add(Duration(days: 365)).toString(),
+              endDate: DateTime.now().add(const Duration(days: 365)).toString(),
               menuItems: [
                 MenuItemModel(
                     id: "1",
@@ -59,7 +58,7 @@ class Globals {
               id: "2",
               menuName: "All Day Menu",
               startDate: DateTime.now().toString(),
-              endDate: DateTime.now().add(Duration(days: 365)).toString(),
+              endDate: DateTime.now().add(const Duration(days: 365)).toString(),
               menuItems: [
                 MenuItemModel(
                     id: "4",

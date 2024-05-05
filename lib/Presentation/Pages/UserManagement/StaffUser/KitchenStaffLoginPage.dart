@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Entities/UsersModel.dart';
@@ -12,14 +11,16 @@ import '../SignUp/StaffSignUpPage.dart';
 // import '../../StaffSignUpPage.dart';
 
 class KitchenStaffLoginPage extends StatefulWidget {
+  const KitchenStaffLoginPage({super.key});
+
   @override
   State<KitchenStaffLoginPage> createState() => _KitchenStaffLoginPageState();
 }
 
 class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool isSignin = false;
 
   @override
@@ -34,7 +35,7 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kitchen Staff Log In'),
+        title: const Text('Kitchen Staff Log In'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -43,14 +44,14 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 10), // Reduced space before the buttons
+            const SizedBox(height: 10), // Reduced space before the buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,24 +60,24 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
                     // Navigate to Forgot Password Page
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                      MaterialPageRoute(builder: (context) => const ForgotPasswordPage()),
                     );
                   },
-                  child: Text('Forgot Password?'),
+                  child: const Text('Forgot Password?'),
                 ),
                 TextButton(
                   onPressed: () {
                     // Navigate to Sign Up Page
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StaffSignUpPage(data: "KitchenStaff")),
+                      MaterialPageRoute(builder: (context) => const StaffSignUpPage(data: "KitchenStaff")),
                     );
                   },
-                  child: Text('Does not have an account?'),
+                  child: const Text('Does not have an account?'),
                 ),
               ],
             ),
-            SizedBox(height: 20), // Additional space before the Log In button
+            const SizedBox(height: 20), // Additional space before the Log In button
             ElevatedButton(
               onPressed: () {
                 _signIn();
@@ -85,12 +86,12 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
                 //   context,
                 //   MaterialPageRoute(builder: (context) => KitchenDashboardPage()),
                 // );
-              },
-              child: Text('Log In', style: TextStyle(fontSize: 18)), // Slightly reduced font size
+              }, // Slightly reduced font size
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(180, 50), // Slightly smaller size
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 12), // Adjusted padding
+                minimumSize: const Size(180, 50), // Slightly smaller size
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12), // Adjusted padding
               ),
+              child: const Text('Log In', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),
@@ -150,6 +151,7 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
     } catch (e) {
       showToast(message: 'Error getting user profile: $e');
     }
+    return null;
   }
 
 // void _signIn() async {

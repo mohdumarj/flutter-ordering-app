@@ -1,28 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled9/Entities/RestaurantsModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantsModel.dart';
 
 import 'RestaurantDetailScreen.dart';
 
 class RestaurantScreen extends StatelessWidget {
+  const RestaurantScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Restaurant List'),
+        title: const Text('Restaurant List'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Restaurants').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           }
           List<RestaurantsModel> restaurants = snapshot.data!.docs.map((doc) {
             return RestaurantsModel .fromMap(doc.data() as Map<String, dynamic>);

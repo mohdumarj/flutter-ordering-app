@@ -1,30 +1,24 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled9/Entities/RestaurantsModel.dart';
-import 'package:untitled9/Entities/UsersModel.dart';
-import 'package:untitled9/Presentation/Pages/Restaurants/RestaurantDetailScreen.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantsModel.dart';
+import 'package:AmmarQiuckServe/Presentation/Pages/Restaurants/RestaurantDetailScreen.dart';
 
 import '../../../../Globals/Common/Toast.dart';
 import '../../AccountPage.dart';
 import '../../AsianFoodPage.dart';
-import '../../BaitAlMadkohoutPage.dart';
-import '../../BaithAlShaypage.dart';
 import '../../BeveragesPage.dart';
-import '../../Cafe42Page.dart';
 import '../../CartPage.dart';
 import '../../FastFoodPage.dart';
 import '../../FoodTypeCardPage.dart';
-import '../../NafahatBurgerPage.dart';
 import '../../RestaurantLabelPage.dart';
 import '../../SweetsPage.dart';
 
 class CustomerPage extends StatefulWidget {
 
   final dynamic data;
-  CustomerPage({Key? key, required this.data}) : super(key: key);
+  const CustomerPage({super.key, required this.data});
   @override
   State<CustomerPage> createState() => _CustomerPageState();
 }
@@ -42,7 +36,7 @@ class _CustomerPageState extends State<CustomerPage> {
   Widget build(BuildContext context) {
         return Scaffold(
         appBar: AppBar(
-        title: Text('Welcome ' + widget.data.toString().toUpperCase()),
+        title: Text('Welcome ${widget.data.toString().toUpperCase()}'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -54,23 +48,23 @@ class _CustomerPageState extends State<CustomerPage> {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for restaurants...',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
            //Food Type
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Types of Food and Drinks',
                 style: TextStyle(fontSize: 18),
               ),
             ),
-            Container(
+            SizedBox(
               height: 150,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -83,7 +77,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FastFoodPage()),
+                          MaterialPageRoute(builder: (context) => const FastFoodPage()),
                         );
                       },
                     ),
@@ -94,7 +88,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => BeveragesPage()),
+                          MaterialPageRoute(builder: (context) => const BeveragesPage()),
                         );
                       },
                     ),
@@ -105,7 +99,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => AsianFoodPage()),
+                          MaterialPageRoute(builder: (context) => const AsianFoodPage()),
                         );
                       },
                     ),
@@ -116,7 +110,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SweetsPage()),
+                          MaterialPageRoute(builder: (context) => const SweetsPage()),
                         );
                       },
                     ),
@@ -180,9 +174,9 @@ class _CustomerPageState extends State<CustomerPage> {
               ],
             ),
 */
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Restaurants From Data Stream',
                 style: TextStyle(fontSize: 18),
@@ -193,10 +187,10 @@ class _CustomerPageState extends State<CustomerPage> {
               stream: _readRestaurantsData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(),);
+                  return const Center(child: CircularProgressIndicator(),);
                 }
                 if (snapshot.data!.isEmpty) {
-                  return Center(child: Text("No Data Yet"));
+                  return const Center(child: Text("No Data Yet"));
                 }
                 final restaurants = snapshot.data;
                 Iterable<RestaurantLabel> restaurantLabels = restaurants!.map((restaurant) {
@@ -218,7 +212,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 );
               }
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
 
           ],
@@ -234,7 +228,7 @@ class _CustomerPageState extends State<CustomerPage> {
               // print(restaurant!.name);
                 // Navigate to home page
               },
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
             ),
             IconButton(
               onPressed: () {
@@ -244,17 +238,17 @@ class _CustomerPageState extends State<CustomerPage> {
                   MaterialPageRoute(builder: (context) => CartPage()),
                 );
               },
-              icon: Icon(Icons.shopping_cart),
+              icon: const Icon(Icons.shopping_cart),
             ),
             IconButton(
               onPressed: () {
                 // Navigate to account page
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AccountPage()),
+                  MaterialPageRoute(builder: (context) => const AccountPage()),
                 );
               },
-              icon: Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle),
             ),
           ],
         ),
@@ -273,7 +267,7 @@ class _CustomerPageState extends State<CustomerPage> {
       return result;
     } catch (e) {
       print('Error fetching data: $e');
-      return Stream<List<RestaurantsModel>>.empty();
+      return const Stream<List<RestaurantsModel>>.empty();
     }
 
   }
@@ -298,10 +292,11 @@ class _CustomerPageState extends State<CustomerPage> {
     } catch (e) {
       showToast(message: 'Error getting Restaurant profile: $e');
     }
+    return null;
   }
 
   Color getRandomColor() {
-    final List<Color> colorsList = Colors.primaries; // Get all primary colors
+    const List<Color> colorsList = Colors.primaries; // Get all primary colors
     final Random random = Random();
     final int randomIndex = random.nextInt(colorsList.length);
     return colorsList[randomIndex];

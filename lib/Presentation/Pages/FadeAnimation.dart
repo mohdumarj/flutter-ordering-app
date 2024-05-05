@@ -4,7 +4,7 @@ class FadeAnimation extends StatefulWidget {
   final double delay;
   final Widget child;
 
-  FadeAnimation(this.delay, this.child);
+  const FadeAnimation(this.delay, this.child, {super.key});
 
   @override
   _FadeAnimationState createState() => _FadeAnimationState();
@@ -19,7 +19,7 @@ class _FadeAnimationState extends State<FadeAnimation> with SingleTickerProvider
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 

@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '639240148483',
     projectId: 'ammarqiuckserve',
     storageBucket: 'ammarqiuckserve.appspot.com',
-    iosBundleId: 'com.example.untitled9',
+    iosBundleId: 'com.Ammar.QickServe',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '639240148483',
     projectId: 'ammarqiuckserve',
     storageBucket: 'ammarqiuckserve.appspot.com',
-    iosBundleId: 'com.example.untitled9',
+    iosBundleId: 'com.Ammar.QickServe',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

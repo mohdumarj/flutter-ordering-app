@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MenuItemCard extends StatelessWidget {
@@ -6,7 +5,7 @@ class MenuItemCard extends StatelessWidget {
   final String price;
   final String description;
 
-  MenuItemCard({
+  const MenuItemCard({super.key, 
     required this.name,
     required this.price,
     required this.description,
@@ -15,7 +14,7 @@ class MenuItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       elevation: 4,
       child: ListTile(
         title: Text(name),
@@ -25,7 +24,7 @@ class MenuItemCard extends StatelessWidget {
             Text(description),
             Text(
                 price,//'\OMR${price.toStringAsFixed(3)}',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),

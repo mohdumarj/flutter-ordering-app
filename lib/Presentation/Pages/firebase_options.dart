@@ -3,7 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:firebase_auth/firebase_auth.dart';
 
 
 
@@ -77,7 +76,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '74908638122',
     projectId: 'flutter-ordering-app-main',
     storageBucket: 'flutter-ordering-app-main.appspot.com',
-    iosBundleId: 'com.example.untitled9',
+    iosBundleId: 'com.Ammar.QickServe',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -86,7 +85,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '74908638122',
     projectId: 'flutter-ordering-app-main',
     storageBucket: 'flutter-ordering-app-main.appspot.com',
-    iosBundleId: 'com.example.untitled9',
+    iosBundleId: 'com.Ammar.QickServe',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

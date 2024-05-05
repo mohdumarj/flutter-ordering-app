@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:untitled9/Entities/MenuItemModel.dart';
 
 import 'RestaurantMenuModel.dart';
 
@@ -60,12 +59,10 @@ class RestaurantsModel{
 
     var menusFromSnapshot = snapshot['menusList'];
     List<RestaurantMenuModel> menus = [];
-    if (menus != null) {
-      for (var menu in menusFromSnapshot) {
-        menus.add(RestaurantMenuModel.fromMap(menu));
-      }
+    for (var menu in menusFromSnapshot) {
+      menus.add(RestaurantMenuModel.fromMap(menu));
     }
-
+  
     return RestaurantsModel(
         id: snapshot['id'] ?? '',
         name: snapshot['name']?? '',

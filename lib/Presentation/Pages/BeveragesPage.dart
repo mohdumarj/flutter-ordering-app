@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // import '../BaithAlShaypage.dart';
@@ -8,11 +7,13 @@ import '../Pages/Cafe42Page.dart';
 import 'RestaurantLabelPage.dart';
 
 class BeveragesPage extends StatelessWidget {
+  const BeveragesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Beverages'),
+        title: const Text('Beverages'),
       ),
       body: Center(
         child: Row(
@@ -24,7 +25,7 @@ class BeveragesPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BaithAlShaypage()),
+                  MaterialPageRoute(builder: (context) => const BaithAlShaypage()),
                 );
               },
             ),
@@ -34,7 +35,7 @@ class BeveragesPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Cafe42Page()),
+                  MaterialPageRoute(builder: (context) => const Cafe42Page()),
                 );
               },
             ),

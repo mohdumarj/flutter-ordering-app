@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../Pages/MenuItemCard.dart';
@@ -6,18 +5,20 @@ import '../Pages/MenuItemCard.dart';
 // import '../MenuItemCard.dart';
 
 class BaithAlShaypage extends StatelessWidget {
+  const BaithAlShaypage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('baith al shay'),
+        title: const Text('baith al shay'),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Menu',
                 style: TextStyle(fontSize: 18),

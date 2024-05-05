@@ -1,19 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class KpiCard extends StatelessWidget {
   final String title;
   final String value;
 
-  const KpiCard({Key? key, required this.title, required this.value}) : super(key: key);
+  const KpiCard({super.key, required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ListTile(
-        title: Text(title, style: TextStyle(fontSize: 18)),
-        trailing: Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        title: Text(title, style: const TextStyle(fontSize: 18)),
+        trailing: Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       ),
     );
   }
@@ -26,7 +25,7 @@ class OrderCard extends StatelessWidget {
   final String orderDetails;
   final String orderTime;
 
-  const OrderCard({
+  const OrderCard({super.key, 
     required this.orderNumber,
     required this.customerName,
     required this.orderDetails,
@@ -36,7 +35,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ListTile(
         title: Text(orderNumber),
         subtitle: Column(
@@ -51,7 +50,7 @@ class OrderCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min, // Ensures the row only takes up as much space as its children
           children: [
             IconButton(
-              icon: Icon(Icons.print),
+              icon: const Icon(Icons.print),
               onPressed: () {
                 // Implement your print functionality here
                 print('Printing Order: $orderNumber');

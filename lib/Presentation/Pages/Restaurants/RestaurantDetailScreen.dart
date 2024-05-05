@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled9/Entities/RestaurantMenuModel.dart';
-import 'package:untitled9/Entities/RestaurantsModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantMenuModel.dart';
+import 'package:AmmarQiuckServe/Entities/RestaurantsModel.dart';
 
 import '../MenuItemCard.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
   final RestaurantsModel restaurant;
 
-  RestaurantDetailScreen({required this.restaurant});
+  const RestaurantDetailScreen({super.key, required this.restaurant});
 
   @override
   State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
@@ -26,7 +25,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
         children: [
           Card(
             elevation: 4, // Adjust the elevation for a shadow effect
-            margin: EdgeInsets.all(16), // Adjust the margin as needed
+            margin: const EdgeInsets.all(16), // Adjust the margin as needed
             child: SizedBox(
               width: double.infinity,
               child: Column(
@@ -36,28 +35,28 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Address: ${widget.restaurant.address}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Email: ${widget.restaurant.email}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Phone Number: ${widget.restaurant.phoneNumber}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Website: ${widget.restaurant.website}',
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ),
                 ],
@@ -93,7 +92,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
           //   ),
           // ),
           //
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
               itemCount: widget.restaurant.menusList.length,

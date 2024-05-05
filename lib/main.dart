@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:untitled9/Globals/Common/Globals.dart';
+import 'package:AmmarQiuckServe/Globals/Common/Globals.dart';
 import 'Presentation/Pages/firebase_options.dart';
 import 'Presentation/Pages/SplashScreenpage.dart';
 
@@ -12,7 +11,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Globals().AppInit();
-  runApp(QuickServeApp());
+  runApp(const QuickServeApp());
 }
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +21,8 @@ Future<void> main() async {
 //   runApp(QuickServeApp());
 // }
 class QuickServeApp extends StatelessWidget {
+  const QuickServeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -30,7 +31,7 @@ class QuickServeApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.orange,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
