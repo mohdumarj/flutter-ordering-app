@@ -16,16 +16,16 @@ class FastFoodPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Centers the buttons horizontally with even spacing
           children: [
-            RestaurantLabel(
-              label: 'NAFAHAT BURGER',
-              color: Colors.orange,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NafahatBurgerPage()),
-                );
-              },
-            ),
+            // RestaurantLabel(
+            //   label: 'NAFAHAT BURGER',
+            //   color: Colors.orange,
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => NafahatBurgerPage()),
+            //     );
+            //   },
+            // ),
             RestaurantLabel(
               label: 'Baith Al Shay',
               color: Colors.blue,

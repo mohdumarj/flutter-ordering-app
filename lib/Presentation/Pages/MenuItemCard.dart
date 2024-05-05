@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MenuItemCard extends StatelessWidget {
   final String name;
-  final double price;
+  final String price;
   final String description;
 
   MenuItemCard({
@@ -24,7 +24,7 @@ class MenuItemCard extends StatelessWidget {
           children: [
             Text(description),
             Text(
-              '\OMR${price.toStringAsFixed(3)}',
+                price,//'\OMR${price.toStringAsFixed(3)}',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
