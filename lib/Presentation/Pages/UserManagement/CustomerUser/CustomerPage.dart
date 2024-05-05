@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
 import 'package:untitled9/Entities/UsersModel.dart';
 
-import 'AccountPage.dart';
-import 'AsianFoodPage.dart';
-import 'BaitAlMadkohoutPage.dart';
-import 'BaithAlShaypage.dart';
-import 'BeveragesPage.dart';
-import 'Cafe42Page.dart';
-import 'CartPage.dart';
-import 'FastFoodPage.dart';
-import 'FoodTypeCardPage.dart';
-import 'NafahatBurgerPage.dart';
-import 'RestaurantLabelPage.dart';
-import 'SweetsPage.dart';
+import '../../../../Globals/Common/Toast.dart';
+import '../../AccountPage.dart';
+import '../../AsianFoodPage.dart';
+import '../../BaitAlMadkohoutPage.dart';
+import '../../BaithAlShaypage.dart';
+import '../../BeveragesPage.dart';
+import '../../Cafe42Page.dart';
+import '../../CartPage.dart';
+import '../../FastFoodPage.dart';
+import '../../FoodTypeCardPage.dart';
+import '../../NafahatBurgerPage.dart';
+import '../../RestaurantLabelPage.dart';
+import '../../SweetsPage.dart';
 
 class CustomerPage extends StatefulWidget {
 
@@ -29,13 +30,8 @@ class CustomerPage extends StatefulWidget {
 class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
-    var restaurantsList = _readRestaurantsData();
-    //=> Restaurants list contains all registered restaurants in the system.
-    // Each restaurant has its Menus as colelction
-    // Each Menu has its items list in it as collection
-    
-    return Scaffold(
-      appBar: AppBar(
+        return Scaffold(
+        appBar: AppBar(
         title: Text('Welcome ' + widget.data.toString().toUpperCase()),
       ),
       body: SingleChildScrollView(
@@ -172,6 +168,48 @@ class _CustomerPageState extends State<CustomerPage> {
                 ],
               ),
             ),
+            SizedBox(height: 10),
+      /*      //testCode
+            StreamBuilder<List<RestaurantsModel>>(
+                stream: _readRestaurantsData() ,
+                builder: (context, snapshot) {
+                  if(snapshot.connectionState == ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator(),);
+                  } if(snapshot.data!.isEmpty){
+                    return Center(child:Text("No Data Yet"));
+                  }
+                  final restaurants = snapshot.data;
+                  return Padding(padding: EdgeInsets.all(8),
+                    child: Column(
+                        children: restaurants!.map((restaurant) {
+                          return ListTile(
+                            leading: GestureDetector(
+                              onTap: (){
+                                //_deleteData(user.id!);
+                              },
+                              child: Icon(Icons.delete),
+                            ),
+                            trailing: GestureDetector(
+                              onTap: (){
+                                // _updateData(
+                                //     UserModel(
+                                //       id: user.id,
+                                //       username: "John Wick",
+                                //       adress: "Pakistan",)
+                                // );
+                              },
+                              child: Icon(Icons.update),
+                            ),
+                            title: Text(restaurant.name!),
+                            subtitle: Text(restaurant.address!),
+                          );
+                        }).toList()
+                    ),);
+                }
+            ),
+            //testCode
+            */
+
           ],
         ),
       ),
@@ -180,7 +218,9 @@ class _CustomerPageState extends State<CustomerPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: () {
+              onPressed: () async {
+               RestaurantsModel? restaurant = await getRestaurantDataWithId("20xwFE3GpI6ORDSEabwg") ;
+               print(restaurant!.name);
                 // Navigate to home page
               },
               icon: Icon(Icons.home),
@@ -210,17 +250,43 @@ class _CustomerPageState extends State<CustomerPage> {
       ),
     );
   }
-  Future<Stream<List<RestaurantsModel>>> _readRestaurantsData() async {
+  /*
+  Stream<List<RestaurantsModel>> _readRestaurantsData()  {
     try {
       final restaurantCollection = FirebaseFirestore.instance.collection("Restaurants");
 
-      return restaurantCollection.snapshots().map((qureySnapshot)
+      var result = restaurantCollection.snapshots().map((qureySnapshot)
       => qureySnapshot.docs.map((e)
       => RestaurantsModel.fromSnapshot(e),).toList());
+
+      return result;
     } catch (e) {
       print('Error fetching data: $e');
+      return Stream<List<RestaurantsModel>>.empty();
     }
 
+  }
+*/
+  Future<RestaurantsModel?> getRestaurantDataWithId(String restaurantId) async {
+    try {
+      // Get a reference to the Firestore document using the provided document ID
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('Restaurants') // Change 'restaurants' to your collection name
+          .doc(restaurantId)
+          .get();
+      // Check if the document exists
+      if (documentSnapshot.exists) {
+        // Access data from the document
+        //print('Document data: ${documentSnapshot.data()}');
+        RestaurantsModel restaurant = RestaurantsModel.fromDocumentSnapshot(documentSnapshot);
+        return restaurant;
+      } else {
+        showToast(message: 'Restaurant profile does not exist, please contact support');
+        return null;
+      }
+    } catch (e) {
+      showToast(message: 'Error getting Restaurant profile: $e');
+    }
   }
 
 }

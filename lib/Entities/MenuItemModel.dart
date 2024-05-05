@@ -33,4 +33,25 @@ class MenuItemModel{
       "calories": calories,
     };
   }
+  factory MenuItemModel.fromMap(Map<String, dynamic> map) {
+    return MenuItemModel(
+      id: map['id'],
+      name: map['name'],
+      description: map['description'],
+      price: map['price'],
+      calories: map['calories'],
+      picture: map['picture'],
+    );
+  }
+
+  factory MenuItemModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
+    return MenuItemModel(
+      id: snapshot['id'] ?? '',
+      name: snapshot['name'] ?? '',
+      description: snapshot['description']?? '',
+      price: snapshot['price']?? '',
+      calories: snapshot['calories']?? '',
+      picture: snapshot['picture']?? '',
+    );
+  }
 }

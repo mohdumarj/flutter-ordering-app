@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
-import '../../CustomerPage.dart';
+import '../CustomerUser/CustomerPage.dart';
 import '../../ForgotPasswordPage.dart';
 import '../SignUp/StaffSignUpPage.dart';
 // import '../../StaffSignUpPage.dart';

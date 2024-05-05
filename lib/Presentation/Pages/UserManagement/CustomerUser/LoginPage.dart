@@ -6,7 +6,8 @@ import 'package:untitled9/Entities/UsersModel.dart';
 
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
-import '../../CustomerPage.dart';
+import '../../Restaurants/RestaurantsList.dart';
+import 'CustomerPage.dart';
 import '../../ForgotPasswordPage.dart';
 import 'SignUpPage.dart';
 
@@ -98,8 +99,8 @@ class _LoginPageState extends State<LoginPage> {
       isSignin = true;
     });
 
-    String email = _emailController.text;
-    String password = _passwordController.text;
+    String email = _emailController.text = "mohd.umarj@gmail.com";
+    String password = _passwordController.text = "123456";
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
@@ -119,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
       showToast(message: "User has successfully been verified");
       Navigator.pushReplacement(
         context,
+        //MaterialPageRoute(builder: (context) => RestaurantScreen()),//CustomerPage(data: userProfile?.username ?? 'Customer')),
         MaterialPageRoute(builder: (context) => CustomerPage(data: userProfile?.username ?? 'Customer')),
       );
 

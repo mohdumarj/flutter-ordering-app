@@ -8,7 +8,7 @@ import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPa
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../Globals/Common/Toast.dart';
-import '../../CustomerPage.dart';
+import 'CustomerPage.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

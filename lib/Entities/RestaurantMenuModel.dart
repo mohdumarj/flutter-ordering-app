@@ -10,6 +10,7 @@ class RestaurantMenuModel{
   final String? endDate ;
   final List<MenuItemModel>? menuItems;
 
+  RestaurantMenuModel( {this.id, this.restaurantId, this.menuName, this.startDate,this.endDate,this.menuItems});
   static RestaurantMenuModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
     return RestaurantMenuModel(
         id: snapshot['id'],
@@ -22,9 +23,6 @@ class RestaurantMenuModel{
     );
   }
 
-
-  RestaurantMenuModel( {this.id, this.restaurantId, this.menuName, this.startDate,this.endDate,this.menuItems});
-
   Map<String, dynamic> toJson() {
     return {
       "id": id,
@@ -36,5 +34,20 @@ class RestaurantMenuModel{
 
 
   };
+  }
+  factory RestaurantMenuModel.fromMap(Map<String, dynamic> map) {
+    List<MenuItemModel> items = [];
+    if (map['menuItems'] != null) {
+      for (var item in map['menuItems']) {
+        items.add(MenuItemModel.fromMap(item));
+      }
+    }
+    return RestaurantMenuModel(
+      id: map['id'],
+      menuName: map['menuName'],
+      startDate: map['startDate'],
+      endDate: map['endDate'],
+      menuItems: items,
+    );
   }
 }
