@@ -41,46 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB-CNHDqheCrlc6_iE5EYsXuYe5z48HfRw',
-    appId: '1:430190917898:web:89ea2b40e081d3385da2f3',
-    messagingSenderId: '430190917898',
-    projectId: 'flutter-ordering-app-mai-dc6c8',
-    authDomain: 'flutter-ordering-app-mai-dc6c8.firebaseapp.com',
-    storageBucket: 'flutter-ordering-app-mai-dc6c8.appspot.com',
+    apiKey: 'AIzaSyAHHqMA25p-KmebPx9-NMHmuemHjjdSHZI',
+    appId: '1:639240148483:web:a3bc1d8dff0521507d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    authDomain: 'ammarqiuckserve.firebaseapp.com',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCA0_IT2T0qFuiQjPMu-tbFujekNPXd-fE',
-    appId: '1:430190917898:android:09350a69cc1282a75da2f3',
-    messagingSenderId: '430190917898',
-    projectId: 'flutter-ordering-app-mai-dc6c8',
-    storageBucket: 'flutter-ordering-app-mai-dc6c8.appspot.com',
+    apiKey: 'AIzaSyByZ_Jzlmf1AQ5C2ZY80QwlR_ru2OShkG0',
+    appId: '1:639240148483:android:bb6c0086a921b71c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB_xd5cz9wCX30_sk2NBdFVPLdD6RStZIA',
-    appId: '1:430190917898:ios:f713c4c70589023e5da2f3',
-    messagingSenderId: '430190917898',
-    projectId: 'flutter-ordering-app-mai-dc6c8',
-    storageBucket: 'flutter-ordering-app-mai-dc6c8.appspot.com',
+    apiKey: 'AIzaSyBPvTa1gZ_mLIOfsz1LlETCn2R4qoSPmzk',
+    appId: '1:639240148483:ios:585337a6fc40163c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
     iosBundleId: 'com.example.untitled9',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB_xd5cz9wCX30_sk2NBdFVPLdD6RStZIA',
-    appId: '1:430190917898:ios:f713c4c70589023e5da2f3',
-    messagingSenderId: '430190917898',
-    projectId: 'flutter-ordering-app-mai-dc6c8',
-    storageBucket: 'flutter-ordering-app-mai-dc6c8.appspot.com',
+    apiKey: 'AIzaSyBPvTa1gZ_mLIOfsz1LlETCn2R4qoSPmzk',
+    appId: '1:639240148483:ios:585337a6fc40163c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
     iosBundleId: 'com.example.untitled9',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB-CNHDqheCrlc6_iE5EYsXuYe5z48HfRw',
-    appId: '1:430190917898:web:8675f5c1d15013075da2f3',
-    messagingSenderId: '430190917898',
-    projectId: 'flutter-ordering-app-mai-dc6c8',
-    authDomain: 'flutter-ordering-app-mai-dc6c8.firebaseapp.com',
-    storageBucket: 'flutter-ordering-app-mai-dc6c8.appspot.com',
+    apiKey: 'AIzaSyAHHqMA25p-KmebPx9-NMHmuemHjjdSHZI',
+    appId: '1:639240148483:web:5ff9e030ec7064ba7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    authDomain: 'ammarqiuckserve.firebaseapp.com',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
+
 }
