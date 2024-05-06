@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled9/Entities/RestaurantMenuModel.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
+import 'package:untitled9/Entities/ShoppingCart.dart';
 
+import '../../../Entities/UserCartItemModel.dart';
 import '../MenuItemCard.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
@@ -20,6 +22,41 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.restaurant.name ?? "Selected Restaurant"),
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  // Navigate to cart screen or perform any other action
+                },
+              ),
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 20,
+                    minHeight: 20,
+                  ),
+                  child: Text(
+                    '${ShoppingCart().getTotalItemCount()}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,12 +110,10 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                 RestaurantMenuModel menu = widget.restaurant.menusList[index];
                 return ExpansionTile(
                   title: Text(menu.menuName ?? "Selected Menu"),
+                  initiallyExpanded: true,
                   children: menu.menuItems!.map((item) {
-                    return MenuItemCard(
-                      name: item.name ?? "Selected Item name",
-                      price: item.price ?? "Selected Item Description",
-                      description: item.price ?? "Check With Staff",
-                    );
+                    UserCartItemModel userCartitem = UserCartItemModel(resturantId: widget.restaurant.id,menuItem: item);
+                    return MenuItemCard().initMenuItemCard(userCartitem);
                   }).toList(),
                 );
               },

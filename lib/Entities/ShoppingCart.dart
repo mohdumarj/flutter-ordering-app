@@ -4,6 +4,7 @@ import 'package:untitled9/Entities/UsersModel.dart';
 
 class ShoppingCart {
 
+
   // List to store items in the shopping cart
   UsersModel _userInformation = UsersModel();
   List<UserCartItemModel> _items = [];
@@ -11,15 +12,15 @@ class ShoppingCart {
 
   // Private constructor
   ShoppingCart._();
-
+  static final ShoppingCart _instance = ShoppingCart._internal();
   // Singleton instance
-  static final ShoppingCart _instance = ShoppingCart._();
+  //static final ShoppingCart _instance = ShoppingCart._();
 
   // Factory method to access the singleton instance
   factory ShoppingCart() {
     return _instance;
   }
-
+  ShoppingCart._internal();
   // Method to add item to the cart
   void addItem(UserCartItemModel item) {
     _items.add(item);
@@ -46,5 +47,9 @@ class ShoppingCart {
   UsersModel getUserInformation() {
     return this._userInformation ;
   }
+  int getTotalItemCount(){
+    return this._items.length;
+  }
+
 }
 
