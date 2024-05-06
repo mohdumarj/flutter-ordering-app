@@ -7,11 +7,13 @@ import 'package:untitled9/Entities/RestaurantsModel.dart';
 class UserCartItemModel {
   final String? resturantId;
   final MenuItemModel? menuItem;
+  double quantity;
 
 
   UserCartItemModel({
    required this.resturantId,
    required this.menuItem,
+    this.quantity = 0
   });
 
 
@@ -20,6 +22,7 @@ class UserCartItemModel {
 
       resturantId:snapshot['resturantId'] ?? '',
       menuItem:snapshot['menuItem'] ,
+      quantity:snapshot['quantity'] ,
 
     );
   }
@@ -28,7 +31,7 @@ class UserCartItemModel {
     return UserCartItemModel(
       resturantId:snapshot['resturantId'] ?? '',
       menuItem:snapshot['menuItem'] ,
-
+      quantity:snapshot['quantity'] ,
     );
   }
   Map<String, dynamic> toJson() {
@@ -36,6 +39,7 @@ class UserCartItemModel {
 
       "resturantId":resturantId,
       "menuItem":menuItem,
+      "quantity" : quantity
     };
   }
 }

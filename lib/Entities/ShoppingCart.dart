@@ -6,8 +6,10 @@ class ShoppingCart {
 
 
   // List to store items in the shopping cart
+
   UsersModel _userInformation = UsersModel();
   List<UserCartItemModel> _items = [];
+
 
 
   // Private constructor
@@ -23,7 +25,15 @@ class ShoppingCart {
   ShoppingCart._internal();
   // Method to add item to the cart
   void addItem(UserCartItemModel item) {
-    _items.add(item);
+    if (_items.contains(item)) {
+      // Increment item quantity
+      int index = _items.indexWhere((element) => element == item);
+      _items[index].quantity += 1;
+    } else {
+      item.quantity = 1;
+      _items.add(item);
+    }
+
   }
 
   // Method to remove item from the cart
@@ -49,6 +59,21 @@ class ShoppingCart {
   }
   int getTotalItemCount(){
     return this._items.length;
+  }
+  double getItemsTotalPrice(){
+    double total = 0.0;
+    double itemPrice = 0.0;
+    for (var item in _items) {
+
+      try {
+        itemPrice = double.parse(item.menuItem?.price ?? "0.0");
+        // Use floatValue here
+      } catch (e) {
+        itemPrice = 0.0;
+      }
+      total += itemPrice * item.quantity * 0.05;// adding 5% tax
+    }
+    return total;
   }
 
 }

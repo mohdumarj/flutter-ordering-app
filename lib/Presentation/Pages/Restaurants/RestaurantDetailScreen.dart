@@ -5,6 +5,7 @@ import 'package:untitled9/Entities/RestaurantsModel.dart';
 import 'package:untitled9/Entities/ShoppingCart.dart';
 
 import '../../../Entities/UserCartItemModel.dart';
+import '../CartDetailsWithCheckout/CartDetailsWithCheckoutPage.dart';
 import '../MenuItemCard.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
@@ -28,7 +29,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               IconButton(
                 icon: Icon(Icons.shopping_cart),
                 onPressed: () {
-                  // Navigate to cart screen or perform any other action
+                  //CheckoutPage()
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => CheckoutPage()),
+                  );
                 },
               ),
               Positioned(
