@@ -93,5 +93,30 @@ class Globals {
       }
     }
   }
+
+  Future<List<RestaurantsModel>> getRestaurantsFromCollection() async {
+    List<RestaurantsModel> restaurantsList = [];
+    try {
+      // Get a reference to the collection
+      CollectionReference restaurantsCollection = FirebaseFirestore.instance.collection('Restaurants');
+
+
+
+      // Get all documents in the collection
+      QuerySnapshot querySnapshot = await restaurantsCollection.get();
+      // Loop through the documents and access the data
+      for (QueryDocumentSnapshot restaurantSnapshot in querySnapshot.docs) {
+        // Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        RestaurantsModel restaurantsModel = RestaurantsModel.fromDocumentSnapshot(restaurantSnapshot);
+        restaurantsList.add(restaurantsModel);
+        // Use the data as needed
+        //print('Document ID: ${documentSnapshot.id}, Data: $data');
+      }
+    } catch (e) {
+      print('Error getting documents: $e');
+    }
+    return restaurantsList;
+  }
+
 }
 

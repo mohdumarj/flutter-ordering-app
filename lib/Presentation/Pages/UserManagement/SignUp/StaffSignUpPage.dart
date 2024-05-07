@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Globals/Common/Globals.dart';
 import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/KitchenStaffLoginPage.dart';
 import 'package:untitled9/Presentation/Pages/UserManagement/StaffUser/WaiterLoginPage.dart';
 
+import '../../../../Entities/RestaurantsModel.dart';
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
@@ -12,6 +14,8 @@ import '../CustomerUser/LoginPage.dart';
 
 class StaffSignUpPage extends StatefulWidget {
 
+
+ late RestaurantsModel? userSelectedRestaurant;
   final dynamic data;
 
   StaffSignUpPage({Key? key, required this.data}) : super(key: key);
@@ -21,6 +25,7 @@ class StaffSignUpPage extends StatefulWidget {
 }
 
 class _StaffSignUpPageState extends State<StaffSignUpPage> {
+
   final FirebaseAuthService _auth = FirebaseAuthService();
   //Restaurant Name
   TextEditingController _resturantNameController = TextEditingController();
@@ -48,6 +53,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
   }
   // @Override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Staff Sign Up'),
@@ -57,12 +63,50 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _resturantNameController,
-              decoration: InputDecoration(
-                labelText: 'Restaurant Name',
+/////////////
+            Text(
+              'Select Restaurant',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
+            SizedBox(height: 8),
+          Container(
+          width: double.infinity, // Set width to fill the screen width
+            child: FutureBuilder<List<RestaurantsModel>>(
+              future: Globals().getRestaurantsFromCollection(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  List<RestaurantsModel> restaurantsList = snapshot.data!;
+                  return DropdownButton<RestaurantsModel>(
+                    hint: Text('Select a restaurant'),
+                    onChanged: (RestaurantsModel? selectedRestaurant) {
+                      print('Selected restaurant: ${selectedRestaurant!.name}');
+                      widget.userSelectedRestaurant = selectedRestaurant;
+                    },
+                    items: restaurantsList.map<DropdownMenuItem<RestaurantsModel>>((RestaurantsModel restaurant) {
+                      return DropdownMenuItem<RestaurantsModel>(
+                        value: restaurant,
+                        child: Text(restaurant.name!),
+                      );
+                    }).toList(),
+                  );
+                }
+              },
+            ),
+          ),
+           ///////////
+           //  TextField(
+           //    controller: _resturantNameController,
+           //    decoration: InputDecoration(
+           //      labelText: 'Restaurant Name',
+           //    ),
+           //  ),
             TextField(
               controller: _resturantLicenseNumberController,
 
@@ -191,4 +235,5 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
     );
     usersCollection.doc("Users").set(newUser.toJson());
   }
+
 }

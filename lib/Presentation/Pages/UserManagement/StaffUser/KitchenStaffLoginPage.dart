@@ -8,7 +8,7 @@ import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
 import '../../ForgotPasswordPage.dart';
-import '../../KitchenDashboardPage.dart';
+import '../../KitchenManagement/KitchenDashboardPage.dart';
 import '../SignUp/StaffSignUpPage.dart';
 // import '../../StaffSignUpPage.dart';
 
@@ -124,7 +124,7 @@ class _KitchenStaffLoginPageState extends State<KitchenStaffLoginPage> {
       showToast(message: "User has successfully been verified");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => KitchenDashboardPage(data: userProfile?.username ?? 'Waiter')),
+        MaterialPageRoute(builder: (context) => KitchenDashboardPage()),//data: userProfile?.username ?? 'Waiter')),
       );
 
     } else {

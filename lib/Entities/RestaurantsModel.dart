@@ -12,7 +12,16 @@ class RestaurantsModel{
   final String? phoneNumber ;
   final List<RestaurantMenuModel> menusList;
 
-  RestaurantsModel({this.id, required this.name, this.address, this.email,this.website,required  this.phoneNumber,required this.menusList});
+  RestaurantsModel(
+      {
+        this.id,
+        required this.name,
+        this.address,
+        this.email,
+        this.website,
+        required  this.phoneNumber,
+        required this.menusList
+      });
 
 
   static RestaurantsModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){

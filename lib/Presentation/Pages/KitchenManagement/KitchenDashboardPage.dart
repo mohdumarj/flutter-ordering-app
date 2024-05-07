@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Pages/KpiCardPage.dart';
-import '../Pages/StatisticsPage.dart';
+import '../KpiCardPage.dart';
+import '../StatisticsPage.dart';
 
 // import '../KpiCardPage.dart';
 // import '../StatisticsPage.dart';
 
 class KitchenDashboardPage extends StatefulWidget {
-  final dynamic data;
-  KitchenDashboardPage({Key? key, required this.data}) : super(key: key);
+  // final dynamic data;
+  // KitchenDashboardPage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<KitchenDashboardPage> createState() => _KitchenDashboardPageState();
