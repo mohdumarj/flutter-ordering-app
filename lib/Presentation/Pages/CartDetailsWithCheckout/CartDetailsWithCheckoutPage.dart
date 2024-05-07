@@ -78,8 +78,9 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   //call function to place convert data into Order and push it to firebase
-                var result =   placeOrder();
-                showToast(message: result.toString());
+                  placeOrder();
+                  ShoppingCart().clearCart();
+
                   Navigator.pushReplacement(
                     context,
                     //MaterialPageRoute(builder: (context) => RestaurantScreen()),//CustomerPage(data: userProfile?.username ?? 'Customer')),
@@ -95,9 +96,16 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
     );
   }
   Future<dynamic>  placeOrder() async {
-    CollectionReference firebaseOrdersCollection = FirebaseFirestore.instance.collection('Orders');
-    var order = OrderModel().PrepareOrder(ShoppingCart() );
-    var orderId = await firebaseOrdersCollection.add(order);
-    showToast(message:"Your order has been placed succesfully, your order number is $orderId" );
+    try{
+      CollectionReference firebaseOrdersCollection = FirebaseFirestore.instance.collection('Orders');
+      var order = OrderModel().PrepareOrder(ShoppingCart() );
+      await firebaseOrdersCollection.add(order.toJson());
+
+    }catch(e){
+      throw e;
+    }
+    // await firebaseOrdersCollection.doc(user?.uid).set(order.toJson());
+    showToast(message:"Your order has been placed succesfully" );
+
   }
 }

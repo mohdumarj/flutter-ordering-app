@@ -5,7 +5,7 @@ import 'package:untitled9/Entities/ShoppingCart.dart';
 import 'package:untitled9/Entities/UserCartItemModel.dart';
 
 class OrderModel{
-   String? id;
+
    String? userId ;
    String? orderPlacementTime ;
    String? orderCompletionTime ;
@@ -15,7 +15,7 @@ class OrderModel{
 
   OrderModel(
       {
-        this.id,
+
         this.userId,
         this.orderPlacementTime,
         this.orderCompletionTime,
@@ -23,7 +23,7 @@ class OrderModel{
         this.cartItemsList,
       });
   OrderModel PrepareOrder(ShoppingCart cart){
-    this.id ;
+
     this.userId = ShoppingCart().getUserInformation().id;
     this.orderPlacementTime = DateTime.now().toString();
     this.orderCompletionTime = "";
@@ -35,7 +35,7 @@ class OrderModel{
   factory OrderModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     return OrderModel(
 
-      id:snapshot['id'] ?? '',
+
       userId:snapshot['userId'] ?? '',
       orderPlacementTime:snapshot['orderPlacementTime'] ?? '',
       orderCompletionTime:snapshot['orderCompletionTime'] ?? '',
@@ -47,7 +47,7 @@ class OrderModel{
 
   static OrderModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot){
     return OrderModel(
-      id:snapshot['id'] ?? '',
+
       userId:snapshot['userId'] ?? '',
       orderPlacementTime:snapshot['orderPlacementTime'] ?? '',
       orderCompletionTime:snapshot['orderCompletionTime'] ?? '',
@@ -58,12 +58,12 @@ class OrderModel{
   }
   Map<String, dynamic> toJson() {
     return {
-      "id":id,
+
       "userId":userId,
       "orderPlacementTime":orderPlacementTime,
       "orderCompletionTime":orderCompletionTime,
       "orderStatus":orderStatus,
-      "selectedMenuItems":cartItemsList,
+      "selectedMenuItems":cartItemsList?.map((cartItem) => cartItem.toJson()).toList(),
     };
   }
 }

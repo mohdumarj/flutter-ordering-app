@@ -38,7 +38,7 @@ class UserCartItemModel {
     return {
 
       "resturantId":resturantId,
-      "menuItem":menuItem,
+      "menuItem":menuItem?.toJson(),
       "quantity" : quantity
     };
   }
