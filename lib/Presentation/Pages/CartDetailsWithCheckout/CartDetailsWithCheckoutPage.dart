@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Entities/OrderModel.dart';
 import '../../../Entities/ShoppingCart.dart';
 import '../../../Entities/UserCartItemModel.dart';
+import '../../../Globals/Common/Toast.dart';
 import '../CheckOutRow/CheckOutRow.dart';
+import '../UserManagement/CustomerUser/CustomerPage.dart';
 
 class CartDetailsWithCheckoutPage extends StatelessWidget {
 
@@ -15,13 +19,14 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
     this.items = ShoppingCart().getItems();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: Text('Review Order'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Card(
             elevation: 4, // Adjust the elevation for a shadow effect
+            color: Colors.orangeAccent, // Background color
             margin: EdgeInsets.all(16), // Adjust the margin as needed
             child: SizedBox(
               width: double.infinity,
@@ -72,9 +77,16 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Implement checkout logic
+                  //call function to place convert data into Order and push it to firebase
+                var result =   placeOrder();
+                showToast(message: result.toString());
+                  Navigator.pushReplacement(
+                    context,
+                    //MaterialPageRoute(builder: (context) => RestaurantScreen()),//CustomerPage(data: userProfile?.username ?? 'Customer')),
+                    MaterialPageRoute(builder: (context) => CustomerPage()),//data: userProfile?.username ?? 'Customer')),
+                  );
                 },
-                child: Text('Proceed to Checkout'),
+                child: Text('Finalize and Place Your Order'),
               ),
             ),
           ),
@@ -82,10 +94,10 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: CartDetailsWithCheckoutPage(),
-  ));
+  Future<dynamic>  placeOrder() async {
+    CollectionReference firebaseOrdersCollection = FirebaseFirestore.instance.collection('Orders');
+    var order = OrderModel().PrepareOrder(ShoppingCart() );
+    var orderId = await firebaseOrdersCollection.add(order);
+    showToast(message:"Your order has been placed succesfully, your order number is $orderId" );
+  }
 }

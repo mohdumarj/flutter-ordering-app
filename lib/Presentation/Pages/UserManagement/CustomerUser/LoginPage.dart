@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         //MaterialPageRoute(builder: (context) => RestaurantScreen()),//CustomerPage(data: userProfile?.username ?? 'Customer')),
-        MaterialPageRoute(builder: (context) => CustomerPage(data: userProfile?.username ?? 'Customer')),
+        MaterialPageRoute(builder: (context) => CustomerPage()),//(data: userProfile?.username ?? 'Customer')),
       );
 
     } else {

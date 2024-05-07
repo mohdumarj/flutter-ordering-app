@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Entities/ShoppingCart.dart';
 
 import '../Pages/UserManagement/CustomerUser/LoginPage.dart';
 // import '../UserManagement/CustomerUser/LoginPage.dart';
 
 class AccountPage extends StatelessWidget {
+  var customerInformation = ShoppingCart().getUserInformation();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,17 +27,18 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            _SectionTitle(title: 'Personal Information'),
-            _InfoRow(label: 'Name', value: 'John Doe'),
-            _InfoRow(label: 'Email', value: 'johndoe@example.com'),
-            _InfoRow(label: 'Phone', value: '+1234567890'),
+            _SectionTitle(title: "Customer Infromation "),
+            _InfoRow(label: 'Name', value: customerInformation.username!.toUpperCase() ),
+            _InfoRow(label: 'Email', value: customerInformation.email!),
+            _InfoRow(label: 'Phone', value: customerInformation.phoneNumber!),
             SizedBox(height: 20),
-            _SectionTitle(title: 'Address Information'),
-            _InfoRow(label: 'Address', value: '123 Main St, City, Country'),
+            // _SectionTitle(title: 'Address Information'),
+            // _InfoRow(label: 'Address', value: customerInformation.),
             SizedBox(height: 40),
             Center(
               child: ElevatedButton(
                 onPressed: () {
+                  signOut();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
@@ -44,6 +48,7 @@ class AccountPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: Colors.redAccent, // Text color
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+
                 ),
               ),
             ),
@@ -51,6 +56,14 @@ class AccountPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  void signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      print('User logged out successfully');
+    } catch (e) {
+      print('Error signing out: $e');
+    }
   }
 }
 
@@ -86,4 +99,5 @@ class _InfoRow extends StatelessWidget {
       ),
     );
   }
+
 }

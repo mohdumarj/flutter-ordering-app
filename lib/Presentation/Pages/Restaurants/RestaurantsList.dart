@@ -25,7 +25,7 @@ class RestaurantScreen extends StatelessWidget {
             return Center(child: Text('No data available'));
           }
           List<RestaurantsModel> restaurants = snapshot.data!.docs.map((doc) {
-            return RestaurantsModel .fromMap(doc.data() as Map<String, dynamic>);
+            return RestaurantsModel.fromMap(doc.data() as Map<String, dynamic>);
           }).toList();
           return ListView.builder(
             itemCount: restaurants.length,

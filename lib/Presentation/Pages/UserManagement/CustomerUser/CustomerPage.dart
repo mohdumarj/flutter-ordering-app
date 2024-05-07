@@ -4,28 +4,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
-import 'package:untitled9/Entities/UsersModel.dart';
+import 'package:untitled9/Entities/ShoppingCart.dart';
+
 import 'package:untitled9/Presentation/Pages/Restaurants/RestaurantDetailScreen.dart';
 
 import '../../../../Globals/Common/Toast.dart';
 import '../../AccountPage.dart';
 import '../../AsianFoodPage.dart';
-import '../../BaitAlMadkohoutPage.dart';
-import '../../BaithAlShaypage.dart';
 import '../../BeveragesPage.dart';
-import '../../Cafe42Page.dart';
 import '../../CartDetailsWithCheckout/CartDetailsWithCheckoutPage.dart';
-import '../../CartPage.dart';
 import '../../FastFoodPage.dart';
 import '../../FoodTypeCardPage.dart';
-import '../../NafahatBurgerPage.dart';
 import '../../RestaurantLabelPage.dart';
 import '../../SweetsPage.dart';
 
 class CustomerPage extends StatefulWidget {
 
-  final dynamic data;
-  CustomerPage({Key? key, required this.data}) : super(key: key);
+  // final dynamic data;
+  // CustomerPage({Key? key, required this.data}) : super(key: key);
   @override
   State<CustomerPage> createState() => _CustomerPageState();
 }
@@ -43,7 +39,7 @@ class _CustomerPageState extends State<CustomerPage> {
   Widget build(BuildContext context) {
         return Scaffold(
         appBar: AppBar(
-        title: Text('Welcome ' + widget.data.toString().toUpperCase()),
+        title: Text('Welcome ${(ShoppingCart().getUserInformation().username!.toUpperCase() )}'), //widget.data.toString().toUpperCase()
       ),
       body: SingleChildScrollView(
         child: Column(

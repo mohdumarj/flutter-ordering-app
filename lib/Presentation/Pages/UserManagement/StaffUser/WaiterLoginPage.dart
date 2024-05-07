@@ -122,7 +122,7 @@ class _WaiterLoginPageState extends State<WaiterLoginPage> {
       showToast(message: "User has successfully been verified");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => CustomerPage(data: userProfile?.username ?? 'Waiter')),
+        MaterialPageRoute(builder: (context) => CustomerPage()),//data: userProfile?.username ?? 'Waiter')),
       );
 
     } else {
