@@ -32,13 +32,13 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   //CheckoutPage()
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => CheckoutPage()),
+                    MaterialPageRoute(builder: (context) => CartDetailsWithCheckoutPage()),
                   );
                 },
               ),
               Positioned(
-                right: 8,
-                top: 8,
+                right: 5,
+                top: 5,
                 child: Container(
                   padding: EdgeInsets.all(4),
                   decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     '${ShoppingCart().getTotalItemCount()}',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: 8,
                     ),
                     textAlign: TextAlign.center,
                   ),

@@ -14,6 +14,7 @@ import '../../BaitAlMadkohoutPage.dart';
 import '../../BaithAlShaypage.dart';
 import '../../BeveragesPage.dart';
 import '../../Cafe42Page.dart';
+import '../../CartDetailsWithCheckout/CartDetailsWithCheckoutPage.dart';
 import '../../CartPage.dart';
 import '../../FastFoodPage.dart';
 import '../../FoodTypeCardPage.dart';
@@ -124,62 +125,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 ),
               ),
             ),
-/*
-            //Restaurants label
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Restaurants',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            //Restaurants list
-            Row(
-              children: [
-                RestaurantLabel(
-                  label: 'Nafahat Burger',
-                  color: Colors.orange,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NafahatBurgerPage()),
-                    );
-                  },
-                ),
-                RestaurantLabel(
-                  label: 'Baith AlShay',
-                  color: Colors.blue,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => BaithAlShaypage()),
-                    );
-                  },
-                ),
-                RestaurantLabel(
-                  label: 'Bait AlMadkohout',
-                  color: Colors.green,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => BaitAlMadkohoutPage()),
-                    );
-                  },
-                ),
-                RestaurantLabel(
-                  label: '42 Cafe',
-                  color: Colors.purple,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Cafe42Page()),
-                    );
-                  },
-                ),
-              ],
-            ),
-*/
+
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -241,7 +187,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 // Navigate to cart page
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CartPage()),
+                  MaterialPageRoute(builder: (context) => CartDetailsWithCheckoutPage()),
                 );
               },
               icon: Icon(Icons.shopping_cart),

@@ -66,12 +66,13 @@ class ShoppingCart {
     for (var item in _items) {
 
       try {
-        itemPrice = double.parse(item.menuItem?.price ?? "0.0");
+        var price = item.menuItem?.price!.split(" ");
+        itemPrice = double.parse( price?.first ?? "0.0");
         // Use floatValue here
       } catch (e) {
         itemPrice = 0.0;
       }
-      total += itemPrice * item.quantity * 0.05;// adding 5% tax
+      total += itemPrice * item.quantity * 1.05;// adding 5% tax
     }
     return total;
   }
