@@ -31,7 +31,7 @@ class Globals {
                     id: "1",
                     name: "Cheez Fatair",
                     description: "Cheez Fatair: special Fatair made with cheeze",
-                    price: "20 AED",
+                    price: "20 ORM",
                     picture: "",
                     calories: "200",
                     category: "Arabic Food"
@@ -40,7 +40,7 @@ class Globals {
                     id: "2",
                     name: "Za'tar Fatair",
                     description: "Za'tar Fatair: special Fatair made with Za'tar",
-                    price: "20 AED",
+                    price: "20 ORM",
                     picture: "",
                     calories: "200",
                     category: "Arabic Food"
@@ -65,7 +65,7 @@ class Globals {
                     id: "4",
                     name: "Chai",
                     description: "Fresh Milk Chai",
-                    price: "2 AED",
+                    price: "2 ORM",
                     picture: "",
                     calories: "200",
                     category: "Beverages"
@@ -74,7 +74,7 @@ class Globals {
                     id: "5",
                     name: "Cofee",
                     description: "Cofee with Milk",
-                    price: "4 AED",
+                    price: "4 ORM",
                     picture: "",
                     calories: "200",
                     category: "Beverages"
