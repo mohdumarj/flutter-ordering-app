@@ -107,13 +107,13 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
            //      labelText: 'Restaurant Name',
            //    ),
            //  ),
-            TextField(
-              controller: _resturantLicenseNumberController,
-
-              decoration: InputDecoration(
-                labelText: 'Restaurant License',
-              ),
-            ),
+           //  TextField(
+           //    controller: _resturantLicenseNumberController,
+           //
+           //    decoration: InputDecoration(
+           //      labelText: 'Restaurant License',
+           //    ),
+           //  ),
             TextField(
               controller: _emailController,
 
@@ -176,8 +176,8 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
       isSigningUp = true;
     });
 
-    String resturantName = _resturantNameController.text;
-    String resturantLicenseNumber = _resturantLicenseNumberController.text;
+    String? resturantName = widget.userSelectedRestaurant?.name;
+   // String resturantLicenseNumber = _resturantLicenseNumberController.text;
     String username = _usernameController.text;
     String password = _passwordController.text;
     String email = _emailController.text;
@@ -201,7 +201,8 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
             username : username,
             userType : widget.data,
             email : email,
-            phoneNumber : phoneNumber
+            phoneNumber : phoneNumber,
+          restaurant: widget.userSelectedRestaurant,
         ));
 
         if(widget.data == "Waiter"){
@@ -231,7 +232,8 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
         username : usersModel.username,
         userType: usersModel.userType,
         email: usersModel.email,
-        phoneNumber: usersModel.phoneNumber
+        phoneNumber: usersModel.phoneNumber,
+      restaurant: widget.userSelectedRestaurant,
     );
     usersCollection.doc("Users").set(newUser.toJson());
   }
