@@ -42,4 +42,13 @@ class UserCartItemModel {
       "quantity" : quantity
     };
   }
+
+  factory UserCartItemModel.fromMap(Map<String, dynamic> map) {
+    return UserCartItemModel(
+      resturantId:map['resturantId'] ?? '',
+      menuItem:map['menuItem'],
+      quantity:map['quantity'] ,
+
+    );
+  }
 }

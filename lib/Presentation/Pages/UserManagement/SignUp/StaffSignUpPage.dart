@@ -1,3 +1,5 @@
+import 'dart:js_interop_unsafe';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +11,13 @@ import '../../../../Entities/RestaurantsModel.dart';
 import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
-import '../CustomerUser/LoginPage.dart';
+
 
 
 class StaffSignUpPage extends StatefulWidget {
 
 
- late RestaurantsModel? userSelectedRestaurant;
+
   final dynamic data;
 
   StaffSignUpPage({Key? key, required this.data}) : super(key: key);
@@ -27,6 +29,7 @@ class StaffSignUpPage extends StatefulWidget {
 class _StaffSignUpPageState extends State<StaffSignUpPage> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
+  RestaurantsModel? userSelectedRestaurant;
   //Restaurant Name
   TextEditingController _resturantNameController = TextEditingController();
   //Restaurant License
@@ -84,10 +87,15 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
                 } else {
                   List<RestaurantsModel> restaurantsList = snapshot.data!;
                   return DropdownButton<RestaurantsModel>(
+                   // value: widget.userSelectedRestaurant,
                     hint: Text('Select a restaurant'),
                     onChanged: (RestaurantsModel? selectedRestaurant) {
                       print('Selected restaurant: ${selectedRestaurant!.name}');
-                      widget.userSelectedRestaurant = selectedRestaurant;
+                      userSelectedRestaurant = selectedRestaurant;
+                      setState(() {
+                        userSelectedRestaurant = selectedRestaurant;
+
+                      });
                     },
                     items: restaurantsList.map<DropdownMenuItem<RestaurantsModel>>((RestaurantsModel restaurant) {
                       return DropdownMenuItem<RestaurantsModel>(
@@ -96,24 +104,15 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
                       );
                     }).toList(),
                   );
+                  /////////////////////
+
+
                 }
               },
             ),
           ),
            ///////////
-           //  TextField(
-           //    controller: _resturantNameController,
-           //    decoration: InputDecoration(
-           //      labelText: 'Restaurant Name',
-           //    ),
-           //  ),
-           //  TextField(
-           //    controller: _resturantLicenseNumberController,
-           //
-           //    decoration: InputDecoration(
-           //      labelText: 'Restaurant License',
-           //    ),
-           //  ),
+
             TextField(
               controller: _emailController,
 
@@ -176,7 +175,7 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
       isSigningUp = true;
     });
 
-    String? resturantName = widget.userSelectedRestaurant?.name;
+   // String? resturantName = widget.userSelectedRestaurant?.name;
    // String resturantLicenseNumber = _resturantLicenseNumberController.text;
     String username = _usernameController.text;
     String password = _passwordController.text;
@@ -197,12 +196,12 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
         // Navigator.pushNamed(context, "/home");
 
         _createUser(UsersModel(
-            id : "1",
-            username : username,
+            id : user.uid,
+            username : username.isEmpty? _emailController.text : username ,
             userType : widget.data,
             email : email,
             phoneNumber : phoneNumber,
-          restaurant: widget.userSelectedRestaurant,
+            restaurant: userSelectedRestaurant,
         ));
 
         if(widget.data == "Waiter"){
@@ -224,18 +223,29 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
 
 
   }
+
+
   void _createUser(UsersModel usersModel) {
+    User? user = FirebaseAuth.instance.currentUser;
     final usersCollection = FirebaseFirestore.instance.collection("Users");
-    String id = usersCollection.doc().id;
-    final newUser = UsersModel(
+
+    try {
+      String id = usersCollection.doc().id;
+      final newUser = UsersModel(
         id: id,
-        username : usersModel.username,
+        username: usersModel.username,
         userType: usersModel.userType,
         email: usersModel.email,
         phoneNumber: usersModel.phoneNumber,
-      restaurant: widget.userSelectedRestaurant,
-    );
-    usersCollection.doc("Users").set(newUser.toJson());
+        restaurant: usersModel.restaurant,
+      );
+      usersCollection.doc(user?.uid).set(newUser.toJson());
+
+    } catch (exp) {
+showToast(message: exp.toString());
+      FirebaseAuthService().deleteUser();
+      throw exp;
+    }
   }
 
 }

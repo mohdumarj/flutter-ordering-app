@@ -41,7 +41,7 @@ class UsersModel{
       "userType": userType,
       "email": email,
       "phoneNumber": phoneNumber,
-      "restaurant" : restaurant
+      "restaurant" : restaurant?.toJson(),
     };
   }
 }

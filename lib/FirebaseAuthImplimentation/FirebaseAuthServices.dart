@@ -46,7 +46,19 @@ class FirebaseAuthService {
     return null;
 
   }
-
+  void deleteUser() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await user.delete();
+        print('User deleted successfully.');
+      } else {
+        print('No user signed in.');
+      }
+    } catch (e) {
+      print('Failed to delete user: $e');
+    }
+  }
 
 
 

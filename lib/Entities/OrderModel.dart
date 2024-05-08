@@ -10,17 +10,16 @@ class OrderModel{
    String? orderPlacementTime ;
    String? orderCompletionTime ;
    String? orderStatus ;
-   List<UserCartItemModel>? cartItemsList ;
+   List<UserCartItemModel>? selectedMenuItems ;
 
 
   OrderModel(
       {
-
         this.userId,
         this.orderPlacementTime,
         this.orderCompletionTime,
         this.orderStatus,
-        this.cartItemsList,
+        this.selectedMenuItems,
       });
   OrderModel PrepareOrder(ShoppingCart cart){
 
@@ -28,7 +27,7 @@ class OrderModel{
     this.orderPlacementTime = DateTime.now().toString();
     this.orderCompletionTime = "";
     this.orderStatus = "Placed";
-    this.cartItemsList = ShoppingCart().getItems();
+    this.selectedMenuItems = ShoppingCart().getItems();
     return this;
   }
 
@@ -40,7 +39,7 @@ class OrderModel{
       orderPlacementTime:snapshot['orderPlacementTime'] ?? '',
       orderCompletionTime:snapshot['orderCompletionTime'] ?? '',
       orderStatus:snapshot['orderStatus'] ?? '',
-      cartItemsList:snapshot['selectedMenuItems'] ,
+      selectedMenuItems:snapshot['selectedMenuItems'] ,
 
     );
   }
@@ -52,7 +51,7 @@ class OrderModel{
       orderPlacementTime:snapshot['orderPlacementTime'] ?? '',
       orderCompletionTime:snapshot['orderCompletionTime'] ?? '',
       orderStatus:snapshot['orderStatus'] ?? '',
-      cartItemsList:snapshot['selectedMenuItems'] ,
+      selectedMenuItems:snapshot['selectedMenuItems'] ,
 
     );
   }
@@ -63,7 +62,26 @@ class OrderModel{
       "orderPlacementTime":orderPlacementTime,
       "orderCompletionTime":orderCompletionTime,
       "orderStatus":orderStatus,
-      "selectedMenuItems":cartItemsList?.map((cartItem) => cartItem.toJson()).toList(),
+      "selectedMenuItems":selectedMenuItems?.map((cartItem) => cartItem.toJson()).toList(),
     };
   }
+   factory OrderModel.fromMap(Map<String, dynamic> map) {
+     List<UserCartItemModel> menuItems = [];
+     if (map['selectedMenuItems'] != null) {
+       for (var item in map['selectedMenuItems']) {
+         menuItems.add(UserCartItemModel.fromMap(item));
+       }
+     }
+     return OrderModel(
+
+       userId:map['userId'] ?? '',
+       orderPlacementTime:map['orderPlacementTime'] ?? '',
+       orderCompletionTime:map['orderCompletionTime'] ?? '',
+       orderStatus:map['orderStatus'] ?? '',
+       selectedMenuItems: menuItems  ,
+
+
+
+     );
+   }
 }

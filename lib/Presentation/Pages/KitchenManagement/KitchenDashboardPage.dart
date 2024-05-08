@@ -1,49 +1,104 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled9/Entities/OrderModel.dart';
 
+import '../../../Entities/MenuItemModel.dart';
+import '../../../Entities/UserCartItemModel.dart';
 import '../KpiCardPage.dart';
 import '../StatisticsPage.dart';
 
 // import '../KpiCardPage.dart';
 // import '../StatisticsPage.dart';
 
-class KitchenDashboardPage extends StatefulWidget {
-  // final dynamic data;
-  // KitchenDashboardPage({Key? key, required this.data}) : super(key: key);
-
-  @override
-  State<KitchenDashboardPage> createState() => _KitchenDashboardPageState();
-}
-
-class _KitchenDashboardPageState extends State<KitchenDashboardPage> {
+class KitchenDashboardPage extends StatelessWidget {
+// class OrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Kitchen Dashboard')),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return OrderCard(
-            orderNumber: 'Order #${index + 1}',
-            customerName: 'Customer ${index + 1}',
-            orderDetails: 'Details for order ${index + 1}',
-            orderTime: '${12 + index}:00 PM',
-          );
-        },
+      appBar: AppBar(
+        title: Text('Orders'),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Statistics'),
-        ],
-        onTap: (index) {
-          if (index == 1) {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => StatisticsPage()));
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('Orders').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
           }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          List<OrderModel> orders = snapshot.data!.docs.map((doc) {
+            List<UserCartItemModel> selectedMenuItems = (doc['selectedMenuItems'] as List<dynamic>)
+                .map((cartItem) {
+              return UserCartItemModel(
+                  resturantId: cartItem['restaurantId'],
+                  menuItem: MenuItemModel(
+                  id: cartItem['menuItem']['id'],
+                  name: cartItem['menuItem']['name'],
+                  description: cartItem['menuItem']['description'],
+                  price: cartItem['menuItem']['price'],
+                  picture: cartItem['menuItem']['picture'],
+                  category: cartItem['menuItem']['category'],
+                  calories: cartItem['menuItem']['calories'],
+                ),
+                quantity: cartItem['quantity'].toDouble(),
+              );
+            })
+                .toList();
+            return OrderModel(
+              userId: doc['userId'],
+              orderPlacementTime: doc['orderPlacementTime'],
+              orderCompletionTime: doc['orderCompletionTime'],
+              orderStatus: doc['orderStatus'],
+              selectedMenuItems: selectedMenuItems,
+            );
+          }).toList();
+
+          return ListView.builder(
+            itemCount: orders.length,
+            itemBuilder: (context, index) {
+              OrderModel order = orders[index];
+              return Card(
+                margin: EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Text('Order for ${order.userId}'),
+                      subtitle: Text('Status: ${order.orderStatus}'),
+                    ),
+                    Divider(),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: order.selectedMenuItems!.length,
+                      itemBuilder: (context, index) {
+                        UserCartItemModel cartItem = order.selectedMenuItems![index];
+                        return ListTile(
+                          title: Text(cartItem.menuItem!.name!),
+                          subtitle: Text('Quantity: ${cartItem.quantity}'),
+                          trailing: Text('Price: ${cartItem.menuItem!.price}'),
+                        );
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text('Order Placement Time: ${order.orderPlacementTime}'),
+                    ),
+                    ListTile(
+                      title: Text('Order Completion Time: ${order.orderCompletionTime}'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
         },
       ),
     );
   }
 }
-
 
