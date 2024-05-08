@@ -100,8 +100,8 @@ class _LoginPageState extends State<LoginPage> {
       isSignin = true;
     });
 
-    String email = _emailController.text = "mohd.umarj@gmail.com";
-    String password = _passwordController.text = "123456";
+    String email = _emailController.text;
+    String password = _passwordController.text;
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
