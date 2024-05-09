@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled9/Entities/ShoppingCart.dart';
 
 import '../Pages/UserManagement/CustomerUser/LoginPage.dart';
+import 'CartDetailsWithCheckout/CartDetailsWithCheckoutPage.dart';
+import 'UserManagement/CustomerUser/CustomerPage.dart';
 // import '../UserManagement/CustomerUser/LoginPage.dart';
 
 class AccountPage extends StatelessWidget {
@@ -55,7 +57,52 @@ class AccountPage extends StatelessWidget {
           ],
         ),
       ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Tooltip(
+                message: 'Home',
+                child: IconButton(
+                  onPressed: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CustomerPage()),
+                    );
+                  },
+                  icon: Icon(Icons.home),
+                ),
+              ),
+              Tooltip(
+                message: 'Shopping Cart',
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartDetailsWithCheckoutPage()),
+                    );
+                  },
+                  icon: Icon(Icons.shopping_cart),
+                ),
+              ),
+              Tooltip(
+                message: 'Account',
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AccountPage()),
+                    );
+                  },
+                  icon: Icon(Icons.account_circle),
+                ),
+              ),
+            ],
+          ),
+        )
+
     );
+
   }
   void signOut() async {
     try {

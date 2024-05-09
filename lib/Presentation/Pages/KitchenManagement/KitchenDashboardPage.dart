@@ -92,12 +92,22 @@ class KitchenDashboardPage extends StatelessWidget {
                       title: Text('Order Completion Time: ${order.orderCompletionTime}'),
                     ),
                   ],
+
                 ),
               );
             },
           );
+
         },
       ),
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          'Total: \OMR${totalPayable.toStringAsFixed(2)}',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      // Checkout Button
     );
   }
 }

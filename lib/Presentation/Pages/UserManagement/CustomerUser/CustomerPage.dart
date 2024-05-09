@@ -7,6 +7,7 @@ import 'package:untitled9/Entities/RestaurantsModel.dart';
 import 'package:untitled9/Entities/ShoppingCart.dart';
 
 import 'package:untitled9/Presentation/Pages/Restaurants/RestaurantDetailScreen.dart';
+import 'package:untitled9/Presentation/Pages/Restaurants/RestaurantsList.dart';
 
 import '../../../../Globals/Common/Toast.dart';
 import '../../AccountPage.dart';
@@ -80,7 +81,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => FastFoodPage()),
+                          MaterialPageRoute(builder: (context) => RestaurantScreen()),
                         );
                       },
                     ),
@@ -166,42 +167,51 @@ class _CustomerPageState extends State<CustomerPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () async {
-              // RestaurantsModel? restaurant = await getRestaurantDataWithId("20xwFE3GpI6ORDSEabwg") ;
-              // print(restaurant!.name);
-                // Navigate to home page
-              },
-              icon: Icon(Icons.home),
-            ),
-            IconButton(
-              onPressed: () {
-                // Navigate to cart page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CartDetailsWithCheckoutPage()),
-                );
-              },
-              icon: Icon(Icons.shopping_cart),
-            ),
-            IconButton(
-              onPressed: () {
-                // Navigate to account page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AccountPage()),
-                );
-              },
-              icon: Icon(Icons.account_circle),
-            ),
-          ],
-        ),
-      ),
-    );
+            bottomNavigationBar: BottomAppBar(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Tooltip(
+                    message: 'Home',
+                    child: IconButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CustomerPage()),
+                        );
+                      },
+                      icon: Icon(Icons.home),
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Shopping Cart',
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CartDetailsWithCheckoutPage()),
+                        );
+                      },
+                      icon: Icon(Icons.shopping_cart),
+                    ),
+                  ),
+                  Tooltip(
+                    message: 'Account',
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AccountPage()),
+                        );
+                      },
+                      icon: Icon(Icons.account_circle),
+                    ),
+                  ),
+                ],
+              ),
+            )
+
+        );
   }
 
   Stream<List<RestaurantsModel>> _readRestaurantsData()  {

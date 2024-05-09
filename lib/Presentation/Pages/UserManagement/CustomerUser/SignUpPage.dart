@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:untitled9/Entities/UsersModel.dart';
 import 'package:untitled9/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../../../Globals/Common/Toast.dart';
-import 'CustomerPage.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -27,18 +24,16 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _usernameController.dispose();
     _passwordController.dispose();
     _emailController.dispose();
     _nameController.dispose();
     _confirmPasswordController.dispose();
     _phoneNumberController.dispose();
-
     super.dispose();
   }
 
-  //@Override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -49,60 +44,21 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
-            ),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-              ),
-            ),
-            TextField(
-              controller: _usernameController,
-
-              decoration: InputDecoration(
-                labelText: 'Username',
-              ),
-            ),
-            TextField(
-              controller: _passwordController,
-
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            TextField(
-              controller: _confirmPasswordController,
-
-              decoration: InputDecoration(
-                labelText: 'Confirm Password',
-              ),
-              obscureText: true,
-            ),
-            TextField(
-              controller: _phoneNumberController,
-
-              decoration: InputDecoration(
-                labelText: 'Phone Number',
-              ),
-              keyboardType: TextInputType.phone,
-            ),
+            buildTextField(_emailController, 'Email', false, TextInputType.emailAddress),
+            buildTextField(_nameController, 'Name', false, TextInputType.text),
+            buildTextField(_usernameController, 'Username', false, TextInputType.text),
+            buildTextField(_passwordController, 'Password', true, TextInputType.text),
+            buildTextField(_confirmPasswordController, 'Confirm Password', true, TextInputType.text),
+            buildTextField(_phoneNumberController, 'Phone Number', false, TextInputType.phone, digitsOnly: true),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _signUp();
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => CustomerPage()),
-                    // );
+                    if (validateFields()) {
+                      _signUp();
+                    }
                   },
                   child: Text('Sign Up'),
                 ),
@@ -113,78 +69,70 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-  void _signUp() async {
 
+  TextField buildTextField(TextEditingController controller, String label, bool obscureText, TextInputType keyboardType, {bool digitsOnly = false}) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        errorText: controller.text.isEmpty ? 'This field cannot be empty' : null,
+      ),
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      inputFormatters: digitsOnly ? [FilteringTextInputFormatter.digitsOnly] : [],
+    );
+  }
+
+  bool validateFields() {
+    bool valid = true;
+    if (_emailController.text.isEmpty || !_emailController.text.contains('@')) {
+      showToast(message: 'Please enter a valid email address');
+      valid = false;
+    }
+    if (_passwordController.text != _confirmPasswordController.text) {
+      showToast(message: 'Passwords do not match');
+      valid = false;
+    }
+    if (_phoneNumberController.text.isEmpty || _phoneNumberController.text.length < 10) {
+      showToast(message: 'Please enter a valid phone number');
+      valid = false;
+    }
+    return valid;
+  }
+
+  void _signUp() async {
     setState(() {
       isSigningUp = true;
     });
 
-    String username = _usernameController.text;
-    String password = _passwordController.text;
-    String email = _emailController.text;
-    String confirmPassword = _confirmPasswordController.text;
-    String phoneNumber = _passwordController.text;
-
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    User? user = await _auth.signUpWithEmailAndPassword(_emailController.text, _passwordController.text);
 
     setState(() {
       isSigningUp = false;
     });
+
     if (user != null) {
       showToast(message: "User is successfully created. Please login to proceed.");
-     // Navigator.pushNamed(context, "/home");
-
       _createUser(UsersModel(
-          id : user.uid,
-          username : username,
-          userType : "Customer",
-          email : email,
-          phoneNumber : phoneNumber
+          id: user.uid,
+          username: _usernameController.text,
+          userType: "Customer",
+          email: _emailController.text,
+          phoneNumber: _phoneNumberController.text
       ));
-
-      Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
     } else {
-      showToast(message: "Some error happend");
+      showToast(message: "Some error happened. Please try again.");
     }
   }
 
   Future<void> _createUser(UsersModel usersModel) async {
     try {
-
-      // Get the current user
-      User? user = FirebaseAuth.instance.currentUser;
-
-      // Reference to the Firestore collection
       CollectionReference users = FirebaseFirestore.instance.collection('Users');
-
-      // Add a new document with the user's UID as the document ID
-      final newUser = UsersModel(
-          id: usersModel.id,
-          username : usersModel.username,
-          userType: usersModel.userType,
-          email: usersModel.email,
-          phoneNumber: usersModel.phoneNumber
-      );
-
-      await users.doc(user?.uid).set(newUser.toJson());
-
+      await users.doc(usersModel.id).set(usersModel.toJson());
       showToast(message: 'User profile has been added');
     } catch (e) {
       showToast(message: 'Error adding user to Firestore: $e');
     }
-    // final usersCollection = FirebaseFirestore.instance.collection("Users");
-    //
-    // final newUser = UsersModel(
-    //     id: usersModel.id,
-    //     username : usersModel.username,
-    //     userType: usersModel.userType,
-    //     email: usersModel.email,
-    //     phoneNumber: usersModel.phoneNumber
-    // );
-    // usersCollection.doc("Users").set(newUser.toJson());
   }
 }
-
