@@ -5,8 +5,6 @@ import 'package:untitled9/Entities/OrderModel.dart';
 
 import '../../../Entities/MenuItemModel.dart';
 import '../../../Entities/UserCartItemModel.dart';
-import '../KpiCardPage.dart';
-import '../StatisticsPage.dart';
 
 // import '../KpiCardPage.dart';
 // import '../StatisticsPage.dart';
@@ -100,13 +98,7 @@ class KitchenDashboardPage extends StatelessWidget {
 
         },
       ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Text(
-          'Total: \OMR${totalPayable.toStringAsFixed(2)}',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+
       // Checkout Button
     );
   }
