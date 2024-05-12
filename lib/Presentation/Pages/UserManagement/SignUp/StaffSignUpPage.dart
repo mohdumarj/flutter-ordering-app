@@ -1,5 +1,3 @@
-import 'dart:js_interop_unsafe';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +10,7 @@ import '../../../../Entities/UsersModel.dart';
 import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
 
-
-
 class StaffSignUpPage extends StatefulWidget {
-
-
-
   final dynamic data;
 
   StaffSignUpPage({Key? key, required this.data}) : super(key: key);
@@ -27,13 +20,13 @@ class StaffSignUpPage extends StatefulWidget {
 }
 
 class _StaffSignUpPageState extends State<StaffSignUpPage> {
-
   final FirebaseAuthService _auth = FirebaseAuthService();
   RestaurantsModel? userSelectedRestaurant;
   //Restaurant Name
   TextEditingController _resturantNameController = TextEditingController();
   //Restaurant License
-  TextEditingController _resturantLicenseNumberController = TextEditingController();
+  TextEditingController _resturantLicenseNumberController =
+      TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -54,9 +47,9 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
 
     super.dispose();
   }
+
   // @Override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Staff Sign Up'),
@@ -75,61 +68,58 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
               ),
             ),
             SizedBox(height: 8),
-          Container(
-          width: double.infinity, // Set width to fill the screen width
-            child: FutureBuilder<List<RestaurantsModel>>(
-              future: Globals().getRestaurantsFromCollection(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  List<RestaurantsModel> restaurantsList = snapshot.data!;
-                  return DropdownButton<RestaurantsModel>(
-                   // value: widget.userSelectedRestaurant,
-                    hint: Text('Select a restaurant'),
-                    onChanged: (RestaurantsModel? selectedRestaurant) {
-                      print('Selected restaurant: ${selectedRestaurant!.name}');
-                      userSelectedRestaurant = selectedRestaurant;
-                      setState(() {
+            Container(
+              width: double.infinity, // Set width to fill the screen width
+              child: FutureBuilder<List<RestaurantsModel>>(
+                future: Globals().getRestaurantsFromCollection(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    List<RestaurantsModel> restaurantsList = snapshot.data!;
+                    return DropdownButton<RestaurantsModel>(
+                      // value: widget.userSelectedRestaurant,
+                      hint: Text('Select a restaurant'),
+                      onChanged: (RestaurantsModel? selectedRestaurant) {
+                        print(
+                            'Selected restaurant: ${selectedRestaurant!.name}');
                         userSelectedRestaurant = selectedRestaurant;
-
-                      });
-                    },
-                    items: restaurantsList.map<DropdownMenuItem<RestaurantsModel>>((RestaurantsModel restaurant) {
-                      return DropdownMenuItem<RestaurantsModel>(
-                        value: restaurant,
-                        child: Text(restaurant.name!),
-                      );
-                    }).toList(),
-                  );
-                  /////////////////////
-
-
-                }
-              },
+                        setState(() {
+                          userSelectedRestaurant = selectedRestaurant;
+                        });
+                      },
+                      items: restaurantsList
+                          .map<DropdownMenuItem<RestaurantsModel>>(
+                              (RestaurantsModel restaurant) {
+                        return DropdownMenuItem<RestaurantsModel>(
+                          value: restaurant,
+                          child: Text(restaurant.name!),
+                        );
+                      }).toList(),
+                    );
+                    /////////////////////
+                  }
+                },
+              ),
             ),
-          ),
-           ///////////
+            ///////////
 
             TextField(
               controller: _emailController,
-
               decoration: InputDecoration(
                 labelText: 'Username',
               ),
             ),
             TextField(
               controller: _emailController,
-
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
             TextField(
               controller: _passwordController,
-
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
@@ -137,7 +127,6 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
             ),
             TextField(
               controller: _confirmPasswordController,
-
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
               ),
@@ -145,7 +134,6 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
             ),
             TextField(
               controller: _phoneNumberController,
-
               decoration: InputDecoration(
                 labelText: 'Phone Number',
               ),
@@ -169,61 +157,59 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
       ),
     );
   }
-  void _signUp() async {
 
+  void _signUp() async {
     setState(() {
       isSigningUp = true;
     });
 
-   // String? resturantName = widget.userSelectedRestaurant?.name;
-   // String resturantLicenseNumber = _resturantLicenseNumberController.text;
+    // String? resturantName = widget.userSelectedRestaurant?.name;
+    // String resturantLicenseNumber = _resturantLicenseNumberController.text;
     String username = _usernameController.text;
     String password = _passwordController.text;
     String email = _emailController.text;
     String confirmPassword = _confirmPasswordController.text;
     String phoneNumber = _passwordController.text;
 
-    if(password != confirmPassword ){
+    if (password != confirmPassword) {
       showToast(message: "Password mismatch error");
-    }else {
+    } else {
       User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
       setState(() {
         isSigningUp = false;
       });
       if (user != null) {
-        showToast(message: widget.data + " User is successfully created. Please login to proceed.");
+        showToast(
+            message: widget.data +
+                " User is successfully created. Please login to proceed.");
         // Navigator.pushNamed(context, "/home");
 
         _createUser(UsersModel(
-            id : user.uid,
-            username : username.isEmpty? _emailController.text : username ,
-            userType : widget.data,
-            email : email,
-            phoneNumber : phoneNumber,
-            restaurant: userSelectedRestaurant,
+          id: user.uid,
+          username: username.isEmpty ? _emailController.text : username,
+          userType: widget.data,
+          email: email,
+          phoneNumber: phoneNumber,
+          restaurant: userSelectedRestaurant,
         ));
 
-        if(widget.data == "Waiter"){
+        if (widget.data == "Waiter") {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => WaiterLoginPage()),
           );
-        }else if(widget.data == "KitchenStaff"){
+        } else if (widget.data == "KitchenStaff") {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => KitchenStaffLoginPage()),
           );
         }
-
       } else {
         showToast(message: "Some error happend");
       }
     }
-
-
   }
-
 
   void _createUser(UsersModel usersModel) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -240,12 +226,10 @@ class _StaffSignUpPageState extends State<StaffSignUpPage> {
         restaurant: usersModel.restaurant,
       );
       usersCollection.doc(user?.uid).set(newUser.toJson());
-
     } catch (exp) {
-showToast(message: exp.toString());
+      showToast(message: exp.toString());
       FirebaseAuthService().deleteUser();
       throw exp;
     }
   }
-
 }
