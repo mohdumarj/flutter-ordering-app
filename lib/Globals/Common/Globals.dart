@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:untitled9/Entities/RestaurantMenuModel.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
 
@@ -7,12 +6,11 @@ import '../../Entities/MenuItemModel.dart';
 import 'Toast.dart';
 
 class Globals {
-
   final firestoreGlobalInstance = FirebaseFirestore.instance;
 
   Future<void> AppInit() async {
-    final restaurantsCollection = FirebaseFirestore.instance.collection(
-        'Restaurants');
+    final restaurantsCollection =
+        FirebaseFirestore.instance.collection('Restaurants');
     final RestaurantsModel restaurant1 = RestaurantsModel(
         id: "1",
         name: "Restaurant 1",
@@ -30,21 +28,21 @@ class Globals {
                 MenuItemModel(
                     id: "1",
                     name: "Cheez Fatair",
-                    description: "Cheez Fatair: special Fatair made with cheeze",
+                    description:
+                        "Cheez Fatair: special Fatair made with cheeze",
                     price: "20 ORM",
                     picture: "",
                     calories: "200",
-                    category: "Arabic Food"
-                ),
+                    category: "Arabic Food"),
                 MenuItemModel(
                     id: "2",
                     name: "Za'tar Fatair",
-                    description: "Za'tar Fatair: special Fatair made with Za'tar",
+                    description:
+                        "Za'tar Fatair: special Fatair made with Za'tar",
                     price: "20 ORM",
                     picture: "",
                     calories: "200",
-                    category: "Arabic Food"
-                )
+                    category: "Arabic Food")
               ])
         ]);
     final RestaurantsModel restaurant2 = RestaurantsModel(
@@ -68,8 +66,7 @@ class Globals {
                     price: "2 ORM",
                     picture: "",
                     calories: "200",
-                    category: "Beverages"
-                ),
+                    category: "Beverages"),
                 MenuItemModel(
                     id: "5",
                     name: "Cofee",
@@ -77,8 +74,7 @@ class Globals {
                     price: "4 ORM",
                     picture: "",
                     calories: "200",
-                    category: "Beverages"
-                )
+                    category: "Beverages")
               ])
         ]);
 
@@ -88,7 +84,7 @@ class Globals {
         await restaurantsCollection.add(restaurant1.toJson());
         await restaurantsCollection.add(restaurant2.toJson());
       } catch (e) {
-        showToast(message:"Error adding user: $e");
+        showToast(message: "Error adding user: $e");
         print("Error adding user: $e");
       }
     }
@@ -98,25 +94,23 @@ class Globals {
     List<RestaurantsModel> restaurantsList = [];
     try {
       // Get a reference to the collection
-      CollectionReference restaurantsCollection = FirebaseFirestore.instance.collection('Restaurants');
-
-
+      CollectionReference restaurantsCollection =
+          FirebaseFirestore.instance.collection('Restaurants');
 
       // Get all documents in the collection
       QuerySnapshot querySnapshot = await restaurantsCollection.get();
       // Loop through the documents and access the data
       for (QueryDocumentSnapshot restaurantSnapshot in querySnapshot.docs) {
         // Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
-        RestaurantsModel restaurantsModel = RestaurantsModel.fromDocumentSnapshot(restaurantSnapshot);
+        RestaurantsModel restaurantsModel =
+            RestaurantsModel.fromDocumentSnapshot(restaurantSnapshot);
         restaurantsList.add(restaurantsModel);
         // Use the data as needed
         //print('Document ID: ${documentSnapshot.id}, Data: $data');
       }
     } catch (e) {
-      print('Error getting documents: $e');
+      showToast(message: 'Error getting documents: $e');
     }
     return restaurantsList;
   }
-
 }
-

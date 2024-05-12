@@ -3,18 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:firebase_auth/firebase_auth.dart';
 
-
-
-/*
-* Platform  Firebase App Id
-web       1:74908638122:web:72184d4ae33756e1a729d3
-android   1:74908638122:android:a14ae320600bd6fda729d3
-ios       1:74908638122:ios:54c1ad6c66b2dfbca729d3
-macos     1:74908638122:ios:54c1ad6c66b2dfbca729d3
-windows   1:74908638122:web:c8d0e4cf4fb588eea729d3
-* */
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -25,9 +14,7 @@ windows   1:74908638122:web:c8d0e4cf4fb588eea729d3
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-
-
-class DefaultFirebaseOptions {
+class DefaultFirebaseOptions_old {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -54,49 +41,46 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBUJ5wIQMsH7xT2hD5guLv7l39KQk1eq5s',
-    appId: '1:74908638122:web:72184d4ae33756e1a729d3',
-    messagingSenderId: '74908638122',
-    projectId: 'flutter-ordering-app-main',
-    authDomain: 'flutter-ordering-app-main.firebaseapp.com',
-    storageBucket: 'flutter-ordering-app-main.appspot.com',
-    measurementId: 'G-85TSJSW368',
+    apiKey: 'AIzaSyAHHqMA25p-KmebPx9-NMHmuemHjjdSHZI',
+    appId: '1:639240148483:web:a3bc1d8dff0521507d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    authDomain: 'ammarqiuckserve.firebaseapp.com',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCsrwEoaLFzrgfdwBwP3Ao_R1ezhtIfdvo',
-    appId: '1:74908638122:android:a14ae320600bd6fda729d3',
-    messagingSenderId: '74908638122',
-    projectId: 'flutter-ordering-app-main',
-    storageBucket: 'flutter-ordering-app-main.appspot.com',
+    apiKey: 'AIzaSyByZ_Jzlmf1AQ5C2ZY80QwlR_ru2OShkG0',
+    appId: '1:639240148483:android:bb6c0086a921b71c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDPjoittFQBAa2YA9oi8-99JtEc4TcWtME',
-    appId: '1:74908638122:ios:54c1ad6c66b2dfbca729d3',
-    messagingSenderId: '74908638122',
-    projectId: 'flutter-ordering-app-main',
-    storageBucket: 'flutter-ordering-app-main.appspot.com',
+    apiKey: 'AIzaSyBPvTa1gZ_mLIOfsz1LlETCn2R4qoSPmzk',
+    appId: '1:639240148483:ios:585337a6fc40163c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
     iosBundleId: 'com.example.untitled9',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDPjoittFQBAa2YA9oi8-99JtEc4TcWtME',
-    appId: '1:74908638122:ios:54c1ad6c66b2dfbca729d3',
-    messagingSenderId: '74908638122',
-    projectId: 'flutter-ordering-app-main',
-    storageBucket: 'flutter-ordering-app-main.appspot.com',
+    apiKey: 'AIzaSyBPvTa1gZ_mLIOfsz1LlETCn2R4qoSPmzk',
+    appId: '1:639240148483:ios:585337a6fc40163c7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    storageBucket: 'ammarqiuckserve.appspot.com',
     iosBundleId: 'com.example.untitled9',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBUJ5wIQMsH7xT2hD5guLv7l39KQk1eq5s',
-    appId: '1:74908638122:web:c8d0e4cf4fb588eea729d3',
-    messagingSenderId: '74908638122',
-    projectId: 'flutter-ordering-app-main',
-    authDomain: 'flutter-ordering-app-main.firebaseapp.com',
-    storageBucket: 'flutter-ordering-app-main.appspot.com',
-    measurementId: 'G-7P66ZMMSG6',
+    apiKey: 'AIzaSyAHHqMA25p-KmebPx9-NMHmuemHjjdSHZI',
+    appId: '1:639240148483:web:5ff9e030ec7064ba7d2036',
+    messagingSenderId: '639240148483',
+    projectId: 'ammarqiuckserve',
+    authDomain: 'ammarqiuckserve.firebaseapp.com',
+    storageBucket: 'ammarqiuckserve.appspot.com',
   );
-
 }
