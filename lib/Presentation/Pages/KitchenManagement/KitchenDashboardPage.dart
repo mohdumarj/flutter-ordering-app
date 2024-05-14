@@ -46,6 +46,7 @@ class KitchenDashboardPage extends StatelessWidget {
               orderCompletionTime: doc['orderCompletionTime'],
               orderStatus: doc['orderStatus'],
               selectedMenuItems: selectedMenuItems,
+              docId: doc.id, // Set the document ID here
             );
           }).toList();
 
@@ -99,13 +100,27 @@ class KitchenDashboardPage extends StatelessWidget {
                           title: Text(
                               'Order Completion Time: ${order.orderCompletionTime}'),
                         ),
+                        ListTile(
+                          title: Text('Order Status: ${order.orderStatus}'),
+                        ),
                         ButtonBar(
                           children: [
                             ElevatedButton(
-                              onPressed: () {
-                                // Handle change order status button pressed
-                                print(
-                                    'Change order status button pressed for order ${order.userId}');
+                              onPressed: () async {
+                                // Update order status to "Completed" in Firestore
+                                await FirebaseFirestore.instance
+                                    .collection('Orders')
+                                    .doc(order
+                                        .docId!) // Use document ID to update specific document
+                                    .update({'orderStatus': 'Completed'});
+
+                                // Refresh view by rebuilding the widget
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        'Order status updated to Completed'),
+                                  ),
+                                );
                               },
                               child: Text('Change Order Status'),
                             ),
