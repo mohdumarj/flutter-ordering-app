@@ -8,14 +8,38 @@ import '../../../Globals/Common/Toast.dart';
 import '../CheckOutRow/CheckOutRow.dart';
 import '../UserManagement/CustomerUser/CustomerPage.dart';
 
-class CartDetailsWithCheckoutPage extends StatelessWidget {
+class CartDetailsWithCheckoutPage extends StatefulWidget {
+  @override
+  State<CartDetailsWithCheckoutPage> createState() =>
+      _CartDetailsWithCheckoutPageState();
+}
 
+class _CartDetailsWithCheckoutPageState
+    extends State<CartDetailsWithCheckoutPage> {
   List<UserCartItemModel> items = [];
+  double totalPayable = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize cart items and total payable
+    updateCartDetails();
+  }
+
+  void updateCartDetails() {
+    // Update cart items and total payable
+    setState(() {
+      var cart = ShoppingCart();
+      items = cart.getItems();
+      totalPayable = cart.getItemsTotalPrice();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final ShoppingCart cart = ShoppingCart();
-    final totalPayable = cart.getItemsTotalPrice();// Access the singleton instance
+    var cart = ShoppingCart();
+    var totalPayable =
+        cart.getItemsTotalPrice(); // Access the singleton instance
     this.items = ShoppingCart().getItems();
     return Scaffold(
       appBar: AppBar(
@@ -55,10 +79,35 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
           // Cart Items
           Expanded(
             child: ListView.builder(
-              itemCount: cart.getTotalItemCount(),//.items.length,
+              itemCount: cart.getTotalItemCount(), //.items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                return CheckOutRow().initMenuItemCard(item);
+                return CheckOutRow(
+                  item: item,
+                  onDelete: (deletedItem) {
+                    ShoppingCart().removeItem(deletedItem);
+                    updateCartDetails();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            '${deletedItem.menuItem!.name} removed from cart'),
+                        action: SnackBarAction(
+                          label: 'Undo',
+                          onPressed: () {
+                            cart.addItem(deletedItem);
+                            updateCartDetails();
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  onIncreaseItem: () {
+                    updateCartDetails();
+                  },
+                  onDecreaseItem: () {
+                    updateCartDetails();
+                  },
+                );
               },
             ),
           ),
@@ -84,7 +133,9 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     //MaterialPageRoute(builder: (context) => RestaurantScreen()),//CustomerPage(data: userProfile?.username ?? 'Customer')),
-                    MaterialPageRoute(builder: (context) => CustomerPage()),//data: userProfile?.username ?? 'Customer')),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CustomerPage()), //data: userProfile?.username ?? 'Customer')),
                   );
                 },
                 child: Text('Finalize and Place Your Order'),
@@ -95,17 +146,17 @@ class CartDetailsWithCheckoutPage extends StatelessWidget {
       ),
     );
   }
-  Future<dynamic>  placeOrder() async {
-    try{
-      CollectionReference firebaseOrdersCollection = FirebaseFirestore.instance.collection('Orders');
-      var order = OrderModel().PrepareOrder(ShoppingCart() );
-      await firebaseOrdersCollection.add(order.toJson());
 
-    }catch(e){
+  Future<dynamic> placeOrder() async {
+    try {
+      CollectionReference firebaseOrdersCollection =
+          FirebaseFirestore.instance.collection('Orders');
+      var order = OrderModel().PrepareOrder(ShoppingCart());
+      await firebaseOrdersCollection.add(order.toJson());
+    } catch (e) {
       throw e;
     }
     // await firebaseOrdersCollection.doc(user?.uid).set(order.toJson());
-    showToast(message:"Your order has been placed succesfully" );
-
+    showToast(message: "Your order has been placed succesfully");
   }
 }
