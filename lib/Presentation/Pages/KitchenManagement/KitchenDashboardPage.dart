@@ -59,6 +59,7 @@ class KitchenDashboardPage extends StatelessWidget {
                 builder: (context, usernameSnapshot) {
                   return Card(
                     margin: EdgeInsets.all(8),
+                    color: Colors.orange,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
