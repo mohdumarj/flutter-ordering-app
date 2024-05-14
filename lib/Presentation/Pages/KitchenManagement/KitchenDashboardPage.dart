@@ -65,6 +65,14 @@ class KitchenDashboardPage extends StatelessWidget {
                           title: Text(
                               'Order for ${usernameSnapshot.data ?? "Customer"}'),
                           subtitle: Text('Status: ${order.orderStatus}'),
+                          trailing: IconButton(
+                            icon: Icon(Icons.print),
+                            onPressed: () {
+                              // Handle print button pressed
+                              print(
+                                  'Print button pressed for order ${order.userId}');
+                            },
+                          ),
                         ),
                         Divider(),
                         ListView.builder(
@@ -90,6 +98,18 @@ class KitchenDashboardPage extends StatelessWidget {
                         ListTile(
                           title: Text(
                               'Order Completion Time: ${order.orderCompletionTime}'),
+                        ),
+                        ButtonBar(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                // Handle change order status button pressed
+                                print(
+                                    'Change order status button pressed for order ${order.userId}');
+                              },
+                              child: Text('Change Order Status'),
+                            ),
+                          ],
                         ),
                       ],
                     ),
