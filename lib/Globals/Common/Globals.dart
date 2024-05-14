@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:untitled9/Entities/RestaurantMenuModel.dart';
 import 'package:untitled9/Entities/RestaurantsModel.dart';
 
@@ -112,5 +115,12 @@ class Globals {
       showToast(message: 'Error getting documents: $e');
     }
     return restaurantsList;
+  }
+
+  Color getRandomColor() {
+    final List<Color> colorsList = Colors.primaries; // Get all primary colors
+    final Random random = Random();
+    final int randomIndex = random.nextInt(colorsList.length);
+    return colorsList[randomIndex];
   }
 }
