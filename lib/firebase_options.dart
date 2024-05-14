@@ -83,5 +83,4 @@ class DefaultFirebaseOptions {
     authDomain: 'ammarqiuckserve.firebaseapp.com',
     storageBucket: 'ammarqiuckserve.appspot.com',
   );
-
 }

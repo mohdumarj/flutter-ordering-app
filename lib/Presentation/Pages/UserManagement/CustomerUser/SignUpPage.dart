@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:untitled9/Entities/UsersModel.dart';
-import 'package:untitled9/FirebaseAuthImplimentation/FirebaseAuthServices.dart';
-import 'package:untitled9/Presentation/Pages/UserManagement/CustomerUser/LoginPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../../../Entities/UsersModel.dart';
+import '../../../../FirebaseAuthImplimentation/FirebaseAuthServices.dart';
 import '../../../../Globals/Common/Toast.dart';
+import 'LoginPage.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -21,6 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _confirmPasswordController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
   bool isSigningUp = false;
+  bool attemptedSubmit = false;  // Flag to track if the submit button has been pressed
 
   @override
   void dispose() {
@@ -56,6 +59,9 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    setState(() {
+                      attemptedSubmit = true;  // Set the flag to true when the button is pressed
+                    });
                     if (validateFields()) {
                       _signUp();
                     }
@@ -75,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        errorText: controller.text.isEmpty ? 'This field cannot be empty' : null,
+        errorText: attemptedSubmit && controller.text.isEmpty ? 'This field cannot be empty' : null,
       ),
       obscureText: obscureText,
       keyboardType: keyboardType,
